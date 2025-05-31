@@ -12,16 +12,15 @@
 
 .shopGridBackground {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   z-index: 0;
-  background: linear-gradient(to bottom, #ffcc00 1px, transparent 1px),
-    linear-gradient(to right, #ffcc00 1px, transparent 1px);
-  background-size: 60px 60px;
+  top: 0;
+  background: linear-gradient(to top, #ffcc00 3px, transparent 3px),
+    linear-gradient(to right, #ffcc00 3px, transparent 3px);
+  background-size: 260px 260px;
   pointer-events: none;
   opacity: 0.7;
+  transform: translateY();
 }
 
 .title {
