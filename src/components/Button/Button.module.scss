@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: center;
   padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
   font-weight: 500;
   transition: all 0.2s ease;
   cursor: pointer;
@@ -41,7 +40,7 @@
 
   &.outline {
     background: transparent;
-    border: 1px solid var(--foreground);
+    border: 1px solid #F6BA00;
 
     &:hover {
       background: rgba(0, 0, 0, 0.05);

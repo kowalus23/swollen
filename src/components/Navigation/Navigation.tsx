@@ -5,6 +5,7 @@ import { ArrowUpToLine, Calendar, List, Shirt } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { Button } from '../Button';
 import styles from './Navigation.module.scss';
 
 interface NavItem {
@@ -24,7 +25,7 @@ export const Navigation = () => {
   // Navigation items
   const navItems: NavItem[] = [
     {
-      icon: <ArrowUpToLine size={32} />, label: 'Strona główna', id: 'top',
+      icon: <ArrowUpToLine size={24} />, label: 'Strona główna', id: 'top',
       onClick: () => {
         if (pathname === '/') {
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -33,9 +34,9 @@ export const Navigation = () => {
         }
       }
     },
-    { icon: <List size={32} />, label: 'Aktualności', id: 'aktualnosci', href: '/aktualnosci' },
-    { icon: <Shirt size={32} />, label: 'Sklep', id: 'sklep', href: '/sklep' },
-    { icon: <Calendar size={32} />, label: 'Events', id: 'events', href: '/events' },
+    { icon: <List size={24} />, label: 'Aktualności', id: 'aktualnosci', href: '/aktualnosci' },
+    { icon: <Shirt size={24} />, label: 'Sklep', id: 'sklep', href: '/sklep' },
+    { icon: <Calendar size={24} />, label: 'Events', id: 'events', href: '/events' },
   ];
 
   return (
@@ -88,6 +89,17 @@ export const Navigation = () => {
             })}
           </div>
           <div className={styles.indicator} />
+        </div>
+        <div className={styles.loginContainer}>
+          <Button
+            variant="outline"
+            className={styles.loginButton}
+            onClick={() => {
+              console.log('clicked');
+            }}
+          >
+            Wejdź do systemu
+          </Button>
         </div>
       </div>
     </aside>
