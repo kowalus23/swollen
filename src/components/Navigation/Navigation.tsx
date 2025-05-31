@@ -24,7 +24,7 @@ export const Navigation = () => {
   // Navigation items
   const navItems: NavItem[] = [
     {
-      icon: <ArrowUpToLine size={32} />, label: 'Top', id: 'top',
+      icon: <ArrowUpToLine size={32} />, label: 'Strona główna', id: 'top',
       onClick: () => {
         if (pathname === '/') {
           window.scrollTo({ top: 0, behavior: 'smooth' });
