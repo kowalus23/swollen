@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer/Footer';
 import Events from '@/components/Pages/home/Events';
 import PreviewItems from '@/components/Pages/home/PreviewItems';
 import SocialMedia from '@/components/Pages/home/SocialMedia';
@@ -12,6 +13,7 @@ export default function Home() {
       <Events />
       <PreviewItems />
       <SocialMedia />
+      <Footer />
     </div>
   );
 }
