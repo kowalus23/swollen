@@ -1,10 +1,11 @@
 'use client';
 
-import { ArrowUpToLine, List, Shirt, Calendar } from 'lucide-react';
-import { useFloating, offset, shift, flip } from '@floating-ui/react';
-import { useState } from 'react';
+import { flip, offset, shift, useFloating } from '@floating-ui/react';
+import { ArrowUpToLine, Calendar, List, Shirt } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
+import styles from './Navigation.module.scss';
 
 interface NavItem {
   icon: React.ReactNode;
@@ -38,9 +39,9 @@ export const Navigation = () => {
   ];
 
   return (
-    <aside className="fixed top-0 left-0 h-full z-50 flex flex-col justify-center items-center" style={{ width: 100 }}>
-      <div className="flex flex-col items-center justify-center h-full w-full relative">
-        <div className="flex flex-col items-center justify-center space-y-10 w-full">
+    <aside className={styles.navigation}>
+      <div className={styles.container}>
+        <div className={styles.navItems}>
           {navItems.map((item) => {
             const { refs, floatingStyles } = useFloating({
               placement: 'right',
@@ -48,14 +49,14 @@ export const Navigation = () => {
             });
             const isActive = (item.href && pathname === item.href) || (item.id === 'top' && pathname === '/');
             return (
-              <div key={item.id} className="relative w-full flex justify-center w-fit">
+              <div key={item.id} className={styles.navItem}>
                 {item.href ? (
                   <Link
                     href={item.href}
                     ref={refs.setReference}
                     onMouseEnter={() => { setActiveTooltip(item.label); setHovered(item.id); }}
                     onMouseLeave={() => { setActiveTooltip(null); setHovered(null); }}
-                    className="transition-colors w-fit"
+                    className={styles.link}
                     style={{ color: hovered === item.id || isActive ? '#FFD600' : '#fff' }}
                   >
                     {item.icon}
@@ -66,8 +67,8 @@ export const Navigation = () => {
                     onClick={item.onClick}
                     onMouseEnter={() => { setActiveTooltip(item.label); setHovered(item.id); }}
                     onMouseLeave={() => { setActiveTooltip(null); setHovered(null); }}
-                    className="transition-colors bg-transparent border-none outline-none"
-                    style={{ color: hovered === item.id || isActive ? '#FFD600' : '#fff', cursor: 'pointer' }}
+                    className={styles.button}
+                    style={{ color: hovered === item.id || isActive ? '#FFD600' : '#fff' }}
                   >
                     {item.icon}
                   </button>
@@ -76,7 +77,7 @@ export const Navigation = () => {
                   <div
                     ref={refs.setFloating}
                     style={floatingStyles}
-                    className="bg-yellow-600 text-black px-3 py-1 rounded text-sm shadow-lg whitespace-nowrap absolute z-50"
+                    className={styles.tooltip}
                   >
                     {item.label}
                   </div>
@@ -85,7 +86,7 @@ export const Navigation = () => {
             );
           })}
         </div>
-        <div className="absolute right-0 top-0 h-full" style={{ width: 3, background: '#FFD600' }} />
+        <div className={styles.indicator} />
       </div>
     </aside>
   );
