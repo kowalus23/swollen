@@ -30,13 +30,15 @@
 
 .gridBackground {
   position: absolute;
-  inset: 0;
   z-index: 0;
-  top: 260px;
+  top: 90px;
+  width: 5000px;
+  left: -1522px;
+  height: 1198px;
   background: linear-gradient(to top, #ffcc00 1px, transparent 1px),
     linear-gradient(to right, #ffcc00 1px, transparent 1px);
-  background-size: 60px 60px;
+  background-size: 58px 86px;
   pointer-events: none;
-  transform: perspective(570px) rotateX(60deg) scaleX(2);
+  transform: perspective(530px) rotateX(60deg) scaleX(2);
   opacity: 0.7;
 }
