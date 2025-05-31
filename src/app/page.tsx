@@ -1,10 +1,11 @@
-import styles from './page.module.scss';
+import Hero from '../components/Pages/home/Hero';
+import Shop from '../components/Pages/home/Shop';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>HOME</h1>
-      <p className={styles.description}>This is the home page.</p>
-    </div>
+    <>
+      <Hero />
+      <Shop />
+    </>
   );
 }
