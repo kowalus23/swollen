@@ -4,13 +4,13 @@ import { type ReactNode } from 'react';
 import { QueryProvider } from './query-provider';
 
 interface RootProviderProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 export function RootProvider({ children }: RootProviderProps) {
-    return (
-        <QueryProvider>
-            {children}
-        </QueryProvider>
-    );
+  return (
+    <QueryProvider>
+      {children}
+    </QueryProvider>
+  );
 } 

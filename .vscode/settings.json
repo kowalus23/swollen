@@ -1,0 +1,42 @@
+{
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit",
+      "source.organizeImports": "explicit"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+  
+    // Custom labels for file tabs
+    "workbench.editor.customLabels.patterns": {
+      // Next.js
+      "**/src/app/**/[[]*[]]/[[]*[]]/page.tsx": "${dirname(2)}/${dirname(1)}/${dirname} • page",
+      "**/src/app/**/[[]*[]]/page.tsx": "${dirname(1)}/${dirname} • page",
+      "**/src/app/**/@[a-z]*/**/page.tsx": "${dirname(1)} • ${dirname} • page",
+      "**/src/app/**/page.tsx": "${dirname} • page",
+      "**/src/app/**/[[]*[]]/[[]*[]]/default.tsx": "${dirname(2)}/${dirname(1)}/${dirname} • default",
+      "**/src/app/**/[[]*[]]/default.tsx": "${dirname(1)}/${dirname} • default",
+      "**/src/app/**/@[a-z]*/**/default.tsx": "${dirname(1)} • ${dirname} • default",
+      "**/src/app/**/default.tsx": "${dirname} • default",
+      "**/src/app/**/[[]*[]]/[[]*[]]/layout.tsx": "${dirname(2)}/${dirname(1)}/${dirname} • layout",
+      "**/src/app/**/[[]*[]]/layout.tsx": "${dirname(1)}/${dirname} • layout",
+      "**/src/app/**/@[a-z]*/**/layout.tsx": "${dirname(1)} • ${dirname} • layout",
+      "**/src/app/**/layout.tsx": "${dirname} • layout",
+      "**/src/app/**/[[]*[]]/[[]*[]]/template.tsx": "${dirname(2)}/${dirname(1)}/${dirname} • template",
+      "**/src/app/**/[[]*[]]/template.tsx": "${dirname(1)}/${dirname} • template",
+      "**/src/app/**/@[a-z]*/**/template.tsx": "${dirname(1)} • ${dirname} • template",
+      "**/src/app/**/template.tsx": "${dirname} • template",
+      "**/src/app/**/[[]*[]]/[[]*[]]/error.tsx": "${dirname(2)}/${dirname(1)}/${dirname} • error",
+      "**/src/app/**/[[]*[]]/error.tsx": "${dirname(1)}/${dirname} • error",
+      "**/src/app/**/@[a-z]*/**/error.tsx": "${dirname(1)} • ${dirname} • error",
+      "**/src/app/**/error.tsx": "${dirname} • error"
+    }
+  }
