@@ -40,53 +40,55 @@ export const Navigation = () => {
 
   return (
     <aside className={styles.navigation}>
-      <div className={styles.container}>
-        <div className={styles.navItems}>
-          {navItems.map((item) => {
-            const { refs, floatingStyles } = useFloating({
-              placement: 'right',
-              middleware: [offset(12), shift(), flip()],
-            });
-            const isActive = (item.href && pathname === item.href) || (item.id === 'top' && pathname === '/');
-            return (
-              <div key={item.id} className={styles.navItem}>
-                {item.href ? (
-                  <Link
-                    href={item.href}
-                    ref={refs.setReference}
-                    onMouseEnter={() => { setActiveTooltip(item.label); setHovered(item.id); }}
-                    onMouseLeave={() => { setActiveTooltip(null); setHovered(null); }}
-                    className={styles.link}
-                    style={{ color: hovered === item.id || isActive ? '#FFD600' : '#fff' }}
-                  >
-                    {item.icon}
-                  </Link>
-                ) : (
-                  <button
-                    ref={refs.setReference}
-                    onClick={item.onClick}
-                    onMouseEnter={() => { setActiveTooltip(item.label); setHovered(item.id); }}
-                    onMouseLeave={() => { setActiveTooltip(null); setHovered(null); }}
-                    className={styles.button}
-                    style={{ color: hovered === item.id || isActive ? '#FFD600' : '#fff' }}
-                  >
-                    {item.icon}
-                  </button>
-                )}
-                {activeTooltip === item.label && (
-                  <div
-                    ref={refs.setFloating}
-                    style={floatingStyles}
-                    className={styles.tooltip}
-                  >
-                    {item.label}
-                  </div>
-                )}
-              </div>
-            );
-          })}
+      <div className={styles.navigationContainer}>
+        <div className={styles.container}>
+          <div className={styles.navItems}>
+            {navItems.map((item) => {
+              const { refs, floatingStyles } = useFloating({
+                placement: 'right',
+                middleware: [offset(12), shift(), flip()],
+              });
+              const isActive = (item.href && pathname === item.href) || (item.id === 'top' && pathname === '/');
+              return (
+                <div key={item.id} className={styles.navItem}>
+                  {item.href ? (
+                    <Link
+                      href={item.href}
+                      ref={refs.setReference}
+                      onMouseEnter={() => { setActiveTooltip(item.label); setHovered(item.id); }}
+                      onMouseLeave={() => { setActiveTooltip(null); setHovered(null); }}
+                      className={styles.link}
+                      style={{ color: hovered === item.id || isActive ? '#ffbf00' : '#fff' }}
+                    >
+                      {item.icon}
+                    </Link>
+                  ) : (
+                    <button
+                      ref={refs.setReference}
+                      onClick={item.onClick}
+                      onMouseEnter={() => { setActiveTooltip(item.label); setHovered(item.id); }}
+                      onMouseLeave={() => { setActiveTooltip(null); setHovered(null); }}
+                      className={styles.button}
+                      style={{ color: hovered === item.id || isActive ? '#ffbf00' : '#fff' }}
+                    >
+                      {item.icon}
+                    </button>
+                  )}
+                  {activeTooltip === item.label && (
+                    <div
+                      ref={refs.setFloating}
+                      style={floatingStyles}
+                      className={styles.tooltip}
+                    >
+                      {item.label}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <div className={styles.indicator} />
         </div>
-        <div className={styles.indicator} />
       </div>
     </aside>
   );
