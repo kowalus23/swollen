@@ -1,15 +1,10 @@
-import { Navigation } from '@/components/Navigation';
+import styles from './page.module.scss';
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      
-      <section className="w-full">
-        <div className="max-w-[1920px] mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold">Welcome to Swollen</h1>
-          <p className="mt-4 text-gray-600">Your new application is ready!</p>
-        </div>
-      </section>
-    </main>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Events</h1>
+      <p className={styles.description}>This is the events page.</p>
+    </div>
   );
 }
