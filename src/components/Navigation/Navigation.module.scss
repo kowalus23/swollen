@@ -4,60 +4,64 @@
   left: 0;
   z-index: 50;
   width: 100%;
+
+  .navigationContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 60px;
+      position: relative;
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+
+      .navItems {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        .navItem {
+          position: relative;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: fit-content;
+
+          .link {
+            transition: color 0.2s ease;
+            width: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.75rem 1.2rem;
+          }
+
+          .button {
+            transition: color 0.2s ease;
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 0 1.2rem;
+          }
+        }
+      }
+    }
+  }
 }
 
-.navigationContainer {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1920px;
-  margin: 0 auto;
-}
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 60px;
-  position: relative;
-}
-
-.navItems {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.navItem {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: fit-content;
-}
-
-.link {
-  transition: color 0.2s ease;
-  width: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.75rem 1.2rem;
-}
-
-.button {
-  transition: color 0.2s ease;
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 0 1.2rem;
-}
 
 .tooltip {
   background: #F6BA00;
@@ -82,9 +86,9 @@
 
 .loginContainer {
   padding: 0 1rem;
-}
 
-.loginButton {
-  text-transform: uppercase;
-  backdrop-filter: blur(10px);
+  .loginButton {
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+  }
 }
