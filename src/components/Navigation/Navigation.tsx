@@ -22,6 +22,8 @@ export const Navigation = () => {
   const pathname = usePathname();
   const router = useRouter();
 
+  const isLoginPage = pathname.includes('/logowanie');
+
   // Navigation items
   const navItems: NavItem[] = [
     {
@@ -40,7 +42,7 @@ export const Navigation = () => {
   ];
 
   return (
-    <aside className={styles.navigation}>
+    <aside className={`${styles.navigation} ${isLoginPage ? styles.hidden : ''}`}>
       <div className={styles.navigationContainer}>
         <div className={styles.container}>
           <div className={styles.navItems}>
@@ -95,7 +97,7 @@ export const Navigation = () => {
             variant="outline"
             className={styles.loginButton}
             onClick={() => {
-              console.log('clicked');
+              router.push('/logowanie');
             }}
           >
             Wejdź do systemu
