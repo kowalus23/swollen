@@ -7,10 +7,19 @@
   justify-content: center;
   height: 100vh;
   position: relative;
-}
+  background: linear-gradient(to bottom,
+      #000 0%,
+      #ffd50082 50%,
+      #000 100%);
 
-.title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(50% - 7px);
+    height: 14px;
+    pointer-events: none;
+    z-index: 1;
+  }
 }
