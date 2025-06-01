@@ -1,16 +1,50 @@
+'use client';
+import { useEffect, useRef, useState } from 'react';
 import styles from './NewsCard.module.scss';
 
 export default function NewsCard() {
+  const [position, setPosition] = useState<'fixed' | 'absolute'>('fixed');
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!cardRef.current) return;
+
+      const heroHeight = 1080 - window.innerHeight;
+      const scrollPosition = window.scrollY;
+
+      if (scrollPosition >= heroHeight) {
+        setPosition('absolute');
+      } else {
+        setPosition('fixed');
+      }
+    };
+
+    // Initial check
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
   return (
-    <div className={styles.card}>
+    <div
+      ref={cardRef}
+      className={styles.card}
+      style={{
+        position,
+      }}
+    >
+      <div className={styles.iconBox}>
+        <span className={styles.icon}>!</span>
+      </div>
       <div className={styles.header}>
         <span className={styles.title}>AKTUALIZACJA</span>
-        <span className={styles.iconBox}>
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="4" y="4" width="32" height="32" rx="2" stroke="#F6BA00" strokeWidth="2" fill="none" />
-            <text x="50%" y="60%" textAnchor="middle" fill="#F6BA00" fontSize="28" fontWeight="bold" dy=".3em">!</text>
-          </svg>
-        </span>
       </div>
       <div className={styles.body}>
         <p>
