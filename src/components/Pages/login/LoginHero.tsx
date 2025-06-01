@@ -36,8 +36,7 @@ export default function LoginHero() {
     <div className={styles.loginWindow}>
       <h1 className={styles.title}>SWOLLEN KATZ</h1>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <div className={styles.inputCustomBorder}>
-        </div>
+        <div className={styles.inputCustomBorder} />
         <Input
           label="E-MAIL"
           type="email"
@@ -50,7 +49,7 @@ export default function LoginHero() {
           {...register('password')}
           error={errors.password?.message}
         />
-        <ButtonStripe type="submit" disabled={isSubmitting}>
+        <ButtonStripe type="submit" disabled={isSubmitting} className={styles.button}>
           WEJDŹ DO SYSTEMU
         </ButtonStripe>
       </form>
