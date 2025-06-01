@@ -3,6 +3,7 @@
 import { ButtonStripe } from '@/components/Button/ButtonStripe';
 import Input from '@/components/Input/Input';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import styles from './LoginHero.module.scss';
@@ -15,6 +16,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function LoginHero() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -26,6 +29,7 @@ export default function LoginHero() {
   const onSubmit = (data: FormData) => {
     // Handle login logic here
     alert(JSON.stringify(data, null, 2));
+    router.push('/');
   };
 
   return (
