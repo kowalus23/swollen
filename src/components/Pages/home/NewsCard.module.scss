@@ -1,0 +1,78 @@
+.card {
+  backdrop-filter: blur(5px);
+  border: 2px solid #FFD600;
+  border-radius: 16px 0 24px 8px;
+  box-shadow: 0 0 24px 2px #FFD60055;
+  padding: 28px 32px 24px 32px;
+  position: relative;
+  color: #FFD600;
+  overflow: hidden;
+  min-width: 350px;
+  max-width: 600px;
+  margin: 0 auto;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #FFD600;
+  text-shadow: 0 0 8px #FFD60099;
+}
+
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 8px 0 16px;
+  width: 48px;
+  height: 48px;
+  margin-left: 18px;
+}
+
+.body {
+  font-size: 1.1rem;
+  color: #FFD600;
+  font-weight: 400;
+  line-height: 1.5;
+  z-index: 1;
+  position: relative;
+  text-shadow: 0 0 6px #FFD60044;
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 18px 10px 16px 10px;
+    min-width: unset;
+    max-width: 98vw;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .iconBox {
+    width: 36px;
+    height: 36px;
+  }
+}

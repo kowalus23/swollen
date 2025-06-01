@@ -8,6 +8,7 @@
   height: 100vh;
   min-height: 1080px;
   max-height: 1080px;
+  position: relative;
 }
 
 .container::after {
@@ -19,6 +20,27 @@
   height: 14px;
   pointer-events: none;
   z-index: 1;
+}
+
+.gridBackground {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(to right,
+      transparent 0 38px,
+      #FFD60022 38px 40px),
+    repeating-linear-gradient(to bottom,
+      transparent 0 38px,
+      #FFD60022 38px 40px);
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  z-index: 2;
 }
 
 .title {
