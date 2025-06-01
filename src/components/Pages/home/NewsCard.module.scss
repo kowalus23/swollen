@@ -1,11 +1,11 @@
 .card {
   backdrop-filter: blur(5px);
-  border: 2px solid #FFD600;
+  border: 2px solid #F6BA00;
   border-radius: 16px 0 24px 8px;
   box-shadow: 0 0 24px 2px #FFD60055;
   padding: 28px 32px 24px 32px;
   position: relative;
-  color: #FFD600;
+  color: #F6BA00;
   overflow: hidden;
   min-width: 350px;
   max-width: 600px;
@@ -36,8 +36,8 @@
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 0.12em;
-  color: #FFD600;
-  text-shadow: 0 0 8px #FFD60099;
+  color: #F6BA00;
+  text-shadow: 0 0 8px #F6BA0099;
 }
 
 .iconBox {
@@ -52,12 +52,12 @@
 
 .body {
   font-size: 1.1rem;
-  color: #FFD600;
+  color: #F6BA00;
   font-weight: 400;
   line-height: 1.5;
   z-index: 1;
   position: relative;
-  text-shadow: 0 0 6px #FFD60044;
+  text-shadow: 0 0 6px #F6BA0044;
 }
 
 @media (max-width: 600px) {
