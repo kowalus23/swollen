@@ -36,6 +36,8 @@ export default function LoginHero() {
     <div className={styles.loginWindow}>
       <h1 className={styles.title}>SWOLLEN KATZ</h1>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <div className={styles.inputCustomBorder}>
+        </div>
         <Input
           label="E-MAIL"
           type="email"
