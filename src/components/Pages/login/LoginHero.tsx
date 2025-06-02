@@ -3,6 +3,7 @@
 import { ButtonStripe } from '@/components/Button/ButtonStripe';
 import Input from '@/components/Input/Input';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -53,6 +54,10 @@ export default function LoginHero() {
           WEJDŹ DO SYSTEMU
         </ButtonStripe>
       </form>
+      <div className={styles.footer}>
+        <Link href="/rejestracja">ZAREJESTRUJ SIĘ</Link>
+        <Link href="/rejestracja">NIE PAMIĘTASZ HASŁA?</Link>
+      </div>
     </div>
   );
 } 
