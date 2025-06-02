@@ -3,17 +3,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 2rem;
+  padding: 1rem 3rem;
   color: white;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 1rem;
   border: none;
-  background: linear-gradient(to bottom, #a78807, #877005);
+  background: linear-gradient(to bottom, #74630c, #766604);
   transition: all 150ms ease-in-out;
-  border-radius: 0.125rem;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   cursor: pointer;
 
   &:hover {
@@ -42,29 +40,29 @@
 .leftLine {
   position: absolute;
   left: 0.5rem;
-  top: 1rem;
-  bottom: 1rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
   width: 2px;
   background-color: white;
-  opacity: 0.8;
+  opacity: 0.7;
 
   &::after {
     content: '';
     position: absolute;
-    left: 4px;
-    top: 4px;
-    bottom: 4px;
-    width: 2px;
+    left: 6px;
+    top: 5px;
+    bottom: 5px;
+    width: 3px;
     background-color: rgb(87, 83, 0);
-    opacity: 0.5;
+    opacity: 0.7;
   }
 }
 
 .rightLine {
   position: absolute;
   right: 0.5rem;
-  top: 1rem;
-  bottom: 1rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
   width: 2px;
   background-color: white;
   opacity: 0.8;
@@ -72,12 +70,12 @@
   &::after {
     content: '';
     position: absolute;
-    right: 4px;
-    top: 4px;
-    bottom: 4px;
-    width: 2px;
+    right: 6px;
+    top: 5px;
+    bottom: 5px;
+    width: 3px;
     background-color: rgb(87, 83, 0);
-    opacity: 0.5;
+    opacity: 0.7;
   }
 }
 
