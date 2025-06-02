@@ -79,6 +79,11 @@
   margin-top: 3rem;
   width: 100%;
 
+  @media (max-width: 500px) {
+    flex-direction: column;
+    text-align: center;
+  }
+
   a {
     color: #FFFFFF;
     font-size: 0.8rem;
