@@ -24,6 +24,8 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="theme-color" content="#000000" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <link rel="icon" type="image/png" href="/manifest/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/manifest/favicon.svg" />
         <link rel="shortcut icon" href="/manifest/favicon.ico" />

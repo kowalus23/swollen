@@ -26,6 +26,13 @@ body {
   min-height: 100vh;
 }
 
+html,
+body {
+  background: #000 !important;
+  color: #fff;
+  /* Optional: for better contrast */
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
