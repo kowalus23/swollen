@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import styles from './LoginHero.module.scss';
+import { supabase } from '@/lib/supabase'
+import { useState } from 'react';
 
 const schema = z.object({
   email: z.string().email('Podaj poprawny e-mail'),
@@ -18,6 +20,7 @@ type FormData = z.infer<typeof schema>;
 
 export default function LoginHero() {
   const router = useRouter();
+  const [error, setError] = useState('');
 
   const {
     register,
@@ -27,10 +30,20 @@ export default function LoginHero() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (fromData: FormData) => {
     // Handle login logic here
-    alert(JSON.stringify(data, null, 2));
-    router.push('/');
+    setError('')
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: fromData.email,
+      password: fromData.password,
+    })
+
+    if (error) {
+      setError(error.message)
+    } else {
+      router.push('/') // przekierowanie po logowaniu
+    }
   };
 
   return (
