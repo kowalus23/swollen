@@ -9,6 +9,7 @@ interface UserState {
 	agreement1: boolean;
 	agreement2: boolean;
 	sentRequest: boolean;
+	isLoading: boolean;
 	setUser: (user: User | null) => void;
 	setName: (name: string | null) => void;
 	setEmail: (email: string | null) => void;
@@ -16,6 +17,7 @@ interface UserState {
 	setAgreement1: (agreement: boolean) => void;
 	setAgreement2: (agreement: boolean) => void;
 	setSentRequest: (sent: boolean) => void;
+	setLoading: (loading: boolean) => void;
 }
 
 export const useUserStore = create<UserState>((set) => ({
@@ -26,6 +28,7 @@ export const useUserStore = create<UserState>((set) => ({
 	agreement1: false,
 	agreement2: false,
 	sentRequest: false,
+	isLoading: true,
 	setUser: (user) => set({ user }),
 	setName: (name) => set({ name }),
 	setEmail: (email) => set({ email }),
@@ -33,4 +36,5 @@ export const useUserStore = create<UserState>((set) => ({
 	setAgreement1: (agreement) => set({ agreement1: agreement }),
 	setAgreement2: (agreement) => set({ agreement2: agreement }),
 	setSentRequest: (sent) => set({ sentRequest: sent }),
+	setLoading: (loading) => set({ isLoading: loading }),
 }));
