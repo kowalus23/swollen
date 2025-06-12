@@ -8,6 +8,19 @@
   height: 100vh;
   min-height: 600px;
   max-height: 1080px;
+  background-color: black;
+}
+
+.shopGridBackground {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(to right,
+      transparent 0 38px,
+      #FFD60022 38px 40px),
+    repeating-linear-gradient(to bottom,
+      transparent 0 38px,
+      #FFD60022 38px 40px);
+  z-index: 1;
 }
 
 

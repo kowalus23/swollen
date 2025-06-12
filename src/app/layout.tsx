@@ -23,6 +23,13 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" type="image/png" href="/manifest/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="/manifest/favicon.svg" />
+        <link rel="shortcut icon" href="/manifest/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/manifest/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest/site.webmanifest" />
+      </head>
       <body
         cz-shortcut-listen="true"
         className={`${poppins.variable} antialiased`}
