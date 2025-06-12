@@ -2,14 +2,14 @@
 
 import { ButtonStripe } from '@/components/Button/ButtonStripe';
 import Input from '@/components/Input/Input';
+import { supabase } from '@/lib/supabase';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import styles from './LoginHero.module.scss';
-import { supabase } from '@/lib/supabase'
-import { useState } from 'react';
 
 const schema = z.object({
   email: z.string().email('Podaj poprawny e-mail'),
@@ -31,7 +31,6 @@ export default function LoginHero() {
   });
 
   const onSubmit = async (fromData: FormData) => {
-    // Handle login logic here
     setError('')
 
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -42,9 +41,11 @@ export default function LoginHero() {
     if (error) {
       setError(error.message)
     } else {
-      router.push('/') // przekierowanie po logowaniu
+      router.push('/')
     }
   };
+
+  console.log(error)
 
   return (
     <div className={styles.loginWindow}>
