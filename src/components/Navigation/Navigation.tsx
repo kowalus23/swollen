@@ -5,6 +5,7 @@ import { ArrowUpToLine, Calendar, List, Shirt } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useNavigationStore } from '../../store/navigationStore';
 import { Button } from '../Button';
 import styles from './Navigation.module.scss';
 
@@ -21,6 +22,7 @@ export const Navigation = () => {
   const [hovered, setHovered] = useState<string | null>(null);
   const pathname = usePathname();
   const router = useRouter();
+  const { darkNavigation } = useNavigationStore();
 
   const isLoginPage = pathname.includes('/logowanie');
 
@@ -52,6 +54,7 @@ export const Navigation = () => {
                 middleware: [offset(12), shift(), flip()],
               });
               const isActive = (item.href && pathname === item.href) || (item.id === 'top' && pathname === '/');
+              const iconColor = hovered === item.id || isActive ? '#ffbf00' : darkNavigation ? '#000' : '#fff';
               return (
                 <div key={item.id} className={styles.navItem}>
                   {item.href ? (
@@ -61,7 +64,7 @@ export const Navigation = () => {
                       onMouseEnter={() => { setActiveTooltip(item.label); setHovered(item.id); }}
                       onMouseLeave={() => { setActiveTooltip(null); setHovered(null); }}
                       className={styles.link}
-                      style={{ color: hovered === item.id || isActive ? '#ffbf00' : '#fff' }}
+                      style={{ color: iconColor }}
                     >
                       {item.icon}
                     </Link>
@@ -72,7 +75,7 @@ export const Navigation = () => {
                       onMouseEnter={() => { setActiveTooltip(item.label); setHovered(item.id); }}
                       onMouseLeave={() => { setActiveTooltip(null); setHovered(null); }}
                       className={styles.button}
-                      style={{ color: hovered === item.id || isActive ? '#ffbf00' : '#fff' }}
+                      style={{ color: iconColor }}
                     >
                       {item.icon}
                     </button>
@@ -95,7 +98,7 @@ export const Navigation = () => {
         <div className={styles.loginContainer}>
           <Button
             variant="outline"
-            className={styles.loginButton}
+            className={[styles.loginButton, darkNavigation && styles.darkNavigation].join(' ')}
             onClick={() => {
               router.push('/logowanie');
             }}
