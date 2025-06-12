@@ -1,16 +1,17 @@
+import type { FeatureCollection, Polygon } from 'geojson';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import Map, { Layer, Marker, Source } from 'react-map-gl/maplibre';
 
-const warsawCoords = [21.0122, 52.2297];
+const warsawCoords: [number, number] = [21.0122, 52.2297];
 
 // Function to create a GeoJSON circle
-function createGeoJSONCircle(center: [number, number], radiusInKm: number, points = 64) {
+function createGeoJSONCircle(center: [number, number], radiusInKm: number, points = 64): FeatureCollection {
   const coords = {
     latitude: center[1],
     longitude: center[0],
   };
   const km = radiusInKm;
-  const ret = [];
+  const ret: [number, number][] = [];
   const distanceX = km / (111.32 * Math.cos((coords.latitude * Math.PI) / 180));
   const distanceY = km / 110.574;
 
@@ -22,14 +23,15 @@ function createGeoJSONCircle(center: [number, number], radiusInKm: number, point
   }
   ret.push(ret[0]);
   return {
-    type: 'FeatureCollection',
+    type: "FeatureCollection",
     features: [
       {
-        type: 'Feature',
+        type: "Feature",
+        properties: {},
         geometry: {
-          type: 'Polygon',
+          type: "Polygon",
           coordinates: [ret],
-        },
+        } as Polygon,
       },
     ],
   };
@@ -39,7 +41,7 @@ const circleGeoJSON = createGeoJSONCircle(warsawCoords, 0.5);
 
 const circleLayer = {
   id: 'circle-radius',
-  type: 'fill',
+  type: 'fill' as const,
   paint: {
     'fill-color': '#FFD700',
     'fill-opacity': 0.2,
@@ -60,7 +62,7 @@ const MapComponent = () => (
     <Source id="circle-source" type="geojson" data={circleGeoJSON}>
       <Layer {...circleLayer} />
     </Source>
-    <Marker longitude={21.0122} latitude={52.2297} color="yellow" />
+    <Marker longitude={21.0122} latitude={52.2297} color="orange" />
   </Map>
 );
 
