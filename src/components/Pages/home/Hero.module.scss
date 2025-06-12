@@ -10,30 +10,39 @@
       #000 0%,
       #ffd50082 50%,
       #000 100%);
+
+  .logo {
+    @media (max-width: 500px) {
+      width: 100%;
+      height: auto;
+      margin-top: 4rem;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(50% - 7px);
+    height: 14px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(50% - 7px);
+    height: 14px;
+    background: radial-gradient(ellipse at center, #ffffff85 0%, transparent 85%);
+    pointer-events: none;
+    z-index: 1;
+  }
 }
 
-.container::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(50% - 7px);
-  height: 14px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.container::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(50% - 7px);
-  height: 14px;
-  background: radial-gradient(ellipse at center, #ffffff85 0%, transparent 85%);
-  pointer-events: none;
-  z-index: 1;
-}
 
 .gridBackground {
   position: absolute;
