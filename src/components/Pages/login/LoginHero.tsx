@@ -45,7 +45,9 @@ export default function LoginHero() {
     }
   };
 
-  console.log(error)
+  if (error) {
+    console.log(error)
+  }
 
   return (
     <div className={styles.loginWindow}>
