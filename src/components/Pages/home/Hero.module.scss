@@ -32,6 +32,11 @@
     background: radial-gradient(ellipse at center, rgb(255 221 118) 0%, transparent 75%);
     pointer-events: none;
     z-index: 1;
+
+    @media (max-width: 500px) {
+      height: 20px;
+      top: calc(50% - 10px);
+    }
   }
 
   .gridBackground {
@@ -55,6 +60,15 @@
     .sun {
       width: 260px;
       height: 260px;
+
+      @media (max-width: 500px) {
+        width: 200px;
+        height: 200px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      top: calc(50% - 120px);
     }
   }
 
@@ -70,9 +84,12 @@
     align-items: center;
 
     .logo {
+      @media (max-width: 1000px) {
+        width: 500px;
+      }
+
       @media (max-width: 500px) {
-        width: 100%;
-        height: auto;
+        width: 300px;
         margin-top: 4rem;
       }
     }
