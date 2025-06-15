@@ -1,6 +1,5 @@
 'use client'
 
-import Footer from '@/components/Footer/Footer';
 import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner';
 import Events from '@/components/Pages/home/Events';
 import PreviewItems from '@/components/Pages/home/PreviewItems';
@@ -37,7 +36,6 @@ export default function Home() {
       <Events />
       <PreviewItems />
       <SocialMedia />
-      <Footer />
     </div>
   );
 }
