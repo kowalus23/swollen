@@ -1,5 +1,6 @@
 'use client';
 import { useNews } from '@/hooks/useNews';
+import { DateTime } from 'luxon';
 import { useEffect, useRef, useState } from 'react';
 import styles from './NewsCard.module.scss';
 
@@ -7,6 +8,22 @@ export default function NewsCard() {
   const [position, setPosition] = useState<'fixed' | 'absolute'>('fixed');
   const cardRef = useRef<HTMLDivElement>(null);
   const { data: newsData, isLoading } = useNews();
+
+  const isVisible = () => {
+    if (!newsData?.news) return false;
+
+    const { isVisible, isVisibleFromDate, visibilityFromDate, visibilityToDate } = newsData.news;
+
+    if (!isVisible) return false;
+
+    if (!isVisibleFromDate) return true;
+
+    const now = DateTime.now();
+    const fromDate = DateTime.fromISO(visibilityFromDate);
+    const toDate = DateTime.fromISO(visibilityToDate);
+
+    return now >= fromDate && now <= toDate;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,9 +51,11 @@ export default function NewsCard() {
     };
   }, []);
 
-  if (isLoading || !newsData?.news.isVisible) {
+  if (isLoading || !isVisible() || !newsData?.news) {
     return null;
   }
+
+  const { title, description } = newsData.news;
 
   return (
     <div
@@ -50,10 +69,10 @@ export default function NewsCard() {
         <span className={styles.icon}>!</span>
       </div>
       <div className={styles.header}>
-        <span className={styles.title}>{newsData.news.title}</span>
+        <span className={styles.title}>{title}</span>
       </div>
       <div className={styles.body}>
-        <p>{newsData.news.description}</p>
+        <p>{description}</p>
       </div>
     </div>
   );
