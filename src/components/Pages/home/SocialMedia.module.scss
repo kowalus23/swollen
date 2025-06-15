@@ -8,10 +8,21 @@
   height: 100vh;
   min-height: 600px;
   max-height: 1080px;
-}
 
+  .title {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
 
-.title {
-  font-size: 2.5rem;
-  font-weight: 700;
+  .socialMediaGridBackground {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(to right,
+        transparent 0 38px,
+        #FFD60022 38px 40px),
+      repeating-linear-gradient(to bottom,
+        transparent 0 38px,
+        #FFD60022 38px 40px);
+    z-index: 1;
+  }
 }

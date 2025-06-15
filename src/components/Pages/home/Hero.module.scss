@@ -8,7 +8,7 @@
   position: relative;
   background: linear-gradient(to bottom,
       #000 0%,
-      #ffd50082 50%,
+      #ffc30082 50%,
       #000 100%);
 
   &::after {
@@ -28,8 +28,8 @@
     left: 0;
     right: 0;
     top: calc(50% - 7px);
-    height: 14px;
-    background: radial-gradient(ellipse at center, #ffffff85 0%, transparent 85%);
+    height: 16px;
+    background: radial-gradient(ellipse at center, rgb(255 221 118) 0%, transparent 75%);
     pointer-events: none;
     z-index: 1;
   }
