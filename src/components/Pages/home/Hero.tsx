@@ -10,6 +10,9 @@ export default function Hero() {
         <Image className={styles.logo} src="/images/logo.svg" alt="Logo" width={555} height={281} style={{ marginBottom: 24 }} />
         <NewsCard />
       </div>
+      <div className={styles.sunContainer}>
+        <Image className={styles.sun} src="/images/striped_sun.svg" alt="Sun" width={100} height={100} />
+      </div>
     </section>
   );
 }

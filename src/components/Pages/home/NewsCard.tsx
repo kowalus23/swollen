@@ -1,10 +1,12 @@
 'use client';
+import { useNews } from '@/hooks/useNews';
 import { useEffect, useRef, useState } from 'react';
 import styles from './NewsCard.module.scss';
 
 export default function NewsCard() {
   const [position, setPosition] = useState<'fixed' | 'absolute'>('fixed');
   const cardRef = useRef<HTMLDivElement>(null);
+  const { data: newsData, isLoading } = useNews();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +34,10 @@ export default function NewsCard() {
     };
   }, []);
 
+  if (isLoading || !newsData?.news.isVisible) {
+    return null;
+  }
+
   return (
     <div
       ref={cardRef}
@@ -44,12 +50,10 @@ export default function NewsCard() {
         <span className={styles.icon}>!</span>
       </div>
       <div className={styles.header}>
-        <span className={styles.title}>AKTUALIZACJA</span>
+        <span className={styles.title}>{newsData.news.title}</span>
       </div>
       <div className={styles.body}>
-        <p>
-          NOWA KOLEKCJA JUŻ W SPRZEDAŻY! NOWA KOLEKCJA JUŻ W SPRZEDAŻY! NOWA KOLEKCJA JUŻ W SPRZEDAŻY! NOWA KOLEKCJA JUŻ W SPRZEDAŻY! NOWA KOLEKCJA JUŻ W SPRZEDAŻY! NOWA KOLEKCJA JUŻ W SPRZEDAŻY!
-        </p>
+        <p>{newsData.news.description}</p>
       </div>
     </div>
   );

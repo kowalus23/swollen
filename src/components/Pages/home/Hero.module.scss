@@ -46,6 +46,18 @@
     z-index: 1;
   }
 
+  .sunContainer {
+    position: absolute;
+    top: calc(50% - 150px);
+    right: 50%;
+    transform: translateX(50%);
+
+    .sun {
+      width: 260px;
+      height: 260px;
+    }
+  }
+
   .content {
     position: relative;
     height: 100%;

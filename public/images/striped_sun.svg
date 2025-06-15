@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="360" height="200"
+     viewBox="0 0 360 200">
+  <defs>
+    <!-- Clip to a half-ellipse (rx=180, ry=200) -->
+    <clipPath id="sunClip">
+      <path d="M 0,200 A 180,200 0 0,1 360,200 L 360,200 L 0,200 Z"/>
+    </clipPath>
+    <!-- Vertical gradient from top (#ffd247) to bottom (#e2b93b) -->
+    <linearGradient id="sunGradient"
+                    x1="0" y1="0"
+                    x2="0" y2="200"
+                    gradientUnits="userSpaceOnUse">
+      <stop offset="0%"  stop-color="#ffd247"/>
+      <stop offset="100%" stop-color="#e2b93b"/>
+    </linearGradient>
+  </defs>
+  <!-- Stripes, all clipped to the half-ellipse and filled with the gradient -->
+  <g clip-path="url(#sunClip)" fill="url(#sunGradient)">
+    <rect x="0"   y="0"   width="360" height="12"/>
+    <rect x="0"   y="14"  width="360" height="12"/>
+    <rect x="0"   y="29"  width="360" height="12"/>
+    <rect x="0"   y="45"  width="360" height="12"/>
+    <rect x="0"   y="62"  width="360" height="12"/>
+    <rect x="0"   y="80"  width="360" height="12"/>
+    <rect x="0"   y="98"  width="360" height="12"/>
+    <rect x="0"   y="116" width="360" height="12"/>
+  </g>
+</svg>
