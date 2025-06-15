@@ -105,6 +105,12 @@
     background-color: #F6BA00;
     border-color: #F6BA00;
     color: white;
+    pointer-events: none;
+
+    &:hover {
+      border-color: #F6BA00;
+      background-color: #F6BA00;
+    }
   }
 }
 

@@ -59,13 +59,14 @@ export default function ProductCard({ product }: ProductCardProps) {
             <p className={styles.modalDescription}>{product.description}</p>
             <div className={styles.sizeGrid}>
               {product.sizes.map((size) => (
-                <button
+                <Button
+                  variant='outline'
                   key={size}
                   className={`${styles.sizeOption} ${selectedSize === size ? styles.selected : ''}`}
                   onClick={() => setSelectedSize(size)}
                 >
                   {size}
-                </button>
+                </Button>
               ))}
             </div>
             <Button
