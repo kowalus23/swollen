@@ -32,6 +32,7 @@ export default async function RootLayout({
         <link rel="shortcut icon" href="/manifest/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/manifest/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest/site.webmanifest" />
+        <link href="https://db.onlinewebfonts.com/c/da9cff182f31b3af02363c770502bf49?family=Brushstrike" rel="stylesheet" />
         <script
           dangerouslySetInnerHTML={{
             __html: `

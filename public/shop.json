@@ -6,8 +6,12 @@
       "name": "Produkt 1",
       "description": "Opis produktu 1",
       "price": 100,
-      "sizes": ["M", "L", "XL"],
-      "image": "https://via.placeholder.com/150"
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "image": "https://i.imgur.com/DG47GhS.png"
     },
     {
       "id": 2,
@@ -15,8 +19,12 @@
       "name": "Produkt 2",
       "description": "Opis produktu 2",
       "price": 200,
-      "sizes": ["M", "L", "XL"],
-      "image": "https://via.placeholder.com/150"
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "image": "https://i.imgur.com/8Wi9ZS5.png"
     }
   ]
 }
