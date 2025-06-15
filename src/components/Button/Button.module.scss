@@ -51,9 +51,11 @@
     opacity: 0.5;
     cursor: not-allowed;
     transform: none;
+    background-color: #bbbbbb;
 
     &:hover {
       transform: none;
+      background-color: #bbbbbb;
     }
   }
 }

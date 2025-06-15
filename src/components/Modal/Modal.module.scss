@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,14 +12,14 @@
 }
 
 .modal {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.8);
   border-radius: 12px;
   width: 90%;
   max-width: 800px;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  backdrop-filter: blur(10px);
+  border: 1px solid #ffd500;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
@@ -28,14 +28,14 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #ffd500;
 }
 
 .title {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #111827;
+  color: white;
 }
 
 .closeButton {
@@ -43,7 +43,7 @@
   border: none;
   padding: 0.5rem;
   cursor: pointer;
-  color: #6b7280;
+  color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -51,8 +51,8 @@
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: #f3f4f6;
-    color: #111827;
+    background-color: #ffd500;
+    color: black;
   }
 }
 
