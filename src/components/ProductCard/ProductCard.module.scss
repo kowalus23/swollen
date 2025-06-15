@@ -22,6 +22,7 @@
       object-fit: cover;
       width: 100%;
       height: 100%;
+      padding: 1rem;
     }
   }
 
@@ -48,6 +49,81 @@
 
     .button {
       width: 100%;
+    }
+  }
+}
+
+.modalContent {
+  display: flex;
+}
+
+.modalImage {
+  flex-shrink: 0;
+  width: 300px;
+  height: 300px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.modalInfo {
+  flex: 1;
+  padding: 1rem;
+}
+
+.modalDescription {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+}
+
+.sizeGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.sizeOption {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  background-color: white;
+
+  &:hover {
+    border-color: #F6BA00;
+  }
+
+  &.selected {
+    background-color: #F6BA00;
+    border-color: #F6BA00;
+    color: white;
+  }
+}
+
+@media (max-width: 500px) {
+  .modalContent {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modalImage {
+    width: 250px;
+    height: 250px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 }
