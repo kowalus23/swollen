@@ -19,11 +19,23 @@ export const Navigation = () => {
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState<string>('top');
+  const [isDesktop, setIsDesktop] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const { darkNavigation } = useNavigationStore();
 
   const isLoginPage = pathname.includes('/logowanie');
+
+  useEffect(() => {
+    const checkIfDesktop = () => {
+      setIsDesktop(window.matchMedia('(min-width: 500px)').matches);
+    };
+
+    checkIfDesktop();
+    window.addEventListener('resize', checkIfDesktop);
+
+    return () => window.removeEventListener('resize', checkIfDesktop);
+  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -157,8 +169,18 @@ export const Navigation = () => {
                   <button
                     ref={refs.setReference}
                     onClick={item.onClick}
-                    onMouseEnter={() => { setActiveTooltip(item.label); setHovered(item.id); }}
-                    onMouseLeave={() => { setActiveTooltip(null); setHovered(null); }}
+                    onMouseEnter={() => {
+                      if (isDesktop) {
+                        setActiveTooltip(item.label);
+                        setHovered(item.id);
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      if (isDesktop) {
+                        setActiveTooltip(null);
+                        setHovered(null);
+                      }
+                    }}
                     className={styles.button}
                     style={{ color: iconColor }}
                   >
