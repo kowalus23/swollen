@@ -4,12 +4,14 @@
       "id": 1,
       "internalName": "produkt-1",
       "name": "Produkt 1",
-      "description": "Opis produktu 1",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
       "price": 100,
       "sizes": [
+        "S",
         "M",
         "L",
-        "XL"
+        "XL",
+        "XXL"
       ],
       "image": "https://i.imgur.com/DG47GhS.png"
     },
@@ -17,7 +19,7 @@
       "id": 2,
       "internalName": "produkt-2",
       "name": "Produkt 2",
-      "description": "Opis produktu 2",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
       "price": 200,
       "sizes": [
         "M",

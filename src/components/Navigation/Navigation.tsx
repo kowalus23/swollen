@@ -41,7 +41,7 @@ export const Navigation = () => {
     const timeout = setTimeout(() => {
       const observerOptions = {
         root: null,
-        rootMargin: '-20% 0px',
+        rootMargin: '-50% 0px',
         threshold: 0
       };
 

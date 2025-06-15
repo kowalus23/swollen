@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   min-height: 600px;
-  max-height: 1080px;
+  max-height: fit-content;
   background-color: black;
 
   .shopGridBackground {
@@ -36,7 +36,7 @@
   position: relative;
   justify-content: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 500px) {
     flex-direction: column;
     gap: 40px;
   }
