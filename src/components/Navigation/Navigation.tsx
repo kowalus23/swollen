@@ -2,9 +2,8 @@
 
 import { flip, offset, shift, useFloating } from '@floating-ui/react';
 import { ArrowUpToLine, Calendar, List, Shirt } from 'lucide-react';
-import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigationStore } from '../../store/navigationStore';
 import { Button } from '../Button';
 import styles from './Navigation.module.scss';
@@ -13,24 +12,98 @@ interface NavItem {
   icon: React.ReactNode;
   label: string;
   id: string;
-  href?: string;
   onClick?: () => void;
 }
 
 export const Navigation = () => {
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<string>('top');
   const pathname = usePathname();
   const router = useRouter();
   const { darkNavigation } = useNavigationStore();
 
   const isLoginPage = pathname.includes('/logowanie');
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px',
+        threshold: 0
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (window.scrollY === 0) {
+              setActiveSection('top');
+            } else {
+              setActiveSection(entry.target.id);
+            }
+          }
+        });
+      }, observerOptions);
+
+      const sections = ['top', 'sklep', 'events', 'aktualnosci'];
+      sections.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          observer.observe(element);
+        }
+      });
+
+      // Add scroll event listener for top detection
+      const handleScroll = () => {
+        if (window.scrollY === 0) {
+          setActiveSection('top');
+        }
+      };
+      window.addEventListener('scroll', handleScroll);
+
+      // Cleanup
+      return () => {
+        sections.forEach((id) => {
+          const element = document.getElementById(id);
+          if (element) {
+            observer.unobserve(element);
+          }
+        });
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, 50);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    if (pathname !== '/') {
+      router.push('/');
+      // Wait for navigation to complete before scrolling
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   // Navigation items
   const navItems: NavItem[] = [
     {
-      icon: <ArrowUpToLine size={24} />, label: 'Strona główna', id: 'top',
+      icon: <ArrowUpToLine size={24} />,
+      label: 'Strona główna',
+      id: 'top',
       onClick: () => {
+        setActiveSection('top');
         if (pathname === '/') {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
@@ -38,9 +111,33 @@ export const Navigation = () => {
         }
       }
     },
-    { icon: <List size={24} />, label: 'Aktualności', id: 'aktualnosci', href: '/aktualnosci' },
-    { icon: <Shirt size={24} />, label: 'Sklep', id: 'sklep', href: '/sklep' },
-    { icon: <Calendar size={24} />, label: 'Events', id: 'events', href: '/events' },
+    {
+      icon: <Shirt size={24} />,
+      label: 'Sklep',
+      id: 'sklep',
+      onClick: () => {
+        setActiveSection('sklep');
+        scrollToSection('sklep');
+      }
+    },
+    {
+      icon: <Calendar size={24} />,
+      label: 'Events',
+      id: 'events',
+      onClick: () => {
+        setActiveSection('events');
+        scrollToSection('events');
+      }
+    },
+    {
+      icon: <List size={24} />,
+      label: 'Aktualności',
+      id: 'aktualnosci',
+      onClick: () => {
+        setActiveSection('aktualnosci');
+        scrollToSection('aktualnosci');
+      }
+    },
   ];
 
   return (
@@ -53,33 +150,20 @@ export const Navigation = () => {
                 placement: 'right',
                 middleware: [offset(12), shift(), flip()],
               });
-              const isActive = (item.href && pathname === item.href) || (item.id === 'top' && pathname === '/');
+              const isActive = activeSection === item.id;
               const iconColor = hovered === item.id || isActive ? '#ffbf00' : darkNavigation ? '#000' : '#fff';
               return (
                 <div key={item.id} className={styles.navItem}>
-                  {item.href ? (
-                    <Link
-                      href={item.href}
-                      ref={refs.setReference}
-                      onMouseEnter={() => { setActiveTooltip(item.label); setHovered(item.id); }}
-                      onMouseLeave={() => { setActiveTooltip(null); setHovered(null); }}
-                      className={styles.link}
-                      style={{ color: iconColor }}
-                    >
-                      {item.icon}
-                    </Link>
-                  ) : (
-                    <button
-                      ref={refs.setReference}
-                      onClick={item.onClick}
-                      onMouseEnter={() => { setActiveTooltip(item.label); setHovered(item.id); }}
-                      onMouseLeave={() => { setActiveTooltip(null); setHovered(null); }}
-                      className={styles.button}
-                      style={{ color: iconColor }}
-                    >
-                      {item.icon}
-                    </button>
-                  )}
+                  <button
+                    ref={refs.setReference}
+                    onClick={item.onClick}
+                    onMouseEnter={() => { setActiveTooltip(item.label); setHovered(item.id); }}
+                    onMouseLeave={() => { setActiveTooltip(null); setHovered(null); }}
+                    className={styles.button}
+                    style={{ color: iconColor }}
+                  >
+                    {item.icon}
+                  </button>
                   {activeTooltip === item.label && (
                     <div
                       ref={refs.setFloating}
