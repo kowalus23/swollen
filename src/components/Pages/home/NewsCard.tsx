@@ -1,7 +1,7 @@
 'use client';
 import { useNews } from '@/hooks/useNews';
 import { DateTime } from 'luxon';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './NewsCard.module.scss';
 
 export default function NewsCard() {
@@ -9,7 +9,7 @@ export default function NewsCard() {
   const cardRef = useRef<HTMLDivElement>(null);
   const { data: newsData, isLoading } = useNews();
 
-  const isVisible = () => {
+  const isVisible = useMemo(() => {
     if (!newsData?.news) return false;
 
     const { isVisible, isVisibleFromDate, visibilityFromDate, visibilityToDate } = newsData.news;
@@ -23,9 +23,7 @@ export default function NewsCard() {
     const toDate = DateTime.fromISO(visibilityToDate);
 
     return now >= fromDate && now <= toDate;
-  };
-
-  console.log(newsData);
+  }, [newsData]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,7 +51,7 @@ export default function NewsCard() {
     };
   }, []);
 
-  if (isLoading || !isVisible() || !newsData?.news) {
+  if (isLoading || !isVisible || !newsData?.news) {
     return null;
   }
 
