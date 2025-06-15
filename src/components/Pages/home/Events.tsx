@@ -37,8 +37,16 @@ export default function Events() {
     <section id="events" className={styles.eventsSection}>
       <div className={styles.gridBackground} />
       <h1 className={styles.title}>EVENTS</h1>
-      <div ref={mapContainerRef} className={styles.mapContainer}>
-        <MapComponent />
+      <div className={styles.content}>
+        <div className={styles.info}>
+          <p className={styles.description}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+            quos.
+          </p>
+        </div>
+        <div ref={mapContainerRef} className={styles.mapContainer}>
+          <MapComponent />
+        </div>
       </div>
     </section>
   );

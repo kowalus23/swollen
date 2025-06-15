@@ -1,6 +1,5 @@
 .card {
   background-color: black;
-  box-shadow: 0 0 24px 2px #FFD60055;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,6 +7,7 @@
   min-width: 340px;
   position: relative;
   border: 2px solid #ffd65a7b;
+  box-shadow: 0 0 24px 2px #FFD60055;
 
   .imageWrapper {
     width: 100%;
