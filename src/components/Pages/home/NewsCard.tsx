@@ -25,6 +25,8 @@ export default function NewsCard() {
     return now >= fromDate && now <= toDate;
   };
 
+  console.log(newsData);
+
   useEffect(() => {
     const handleScroll = () => {
       if (!cardRef.current) return;

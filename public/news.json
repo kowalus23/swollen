@@ -3,7 +3,7 @@
     "title": "AKTUALIZACJA",
     "description": "Nowa kolekcja juz w sprzedaży! Nowa kolekcja juz w sprzedaży! Nowa kolekcja juz w sprzedaży! Nowa kolekcja juz w sprzedaży!",
     "isVisible": true,
-    "isVisibleFromDate": false,
+    "isVisibleFromDate": true,
     "visibilityFromDate": "2025-06-15",
     "visibilityToDate": "2025-08-20"
   }
