@@ -2,10 +2,12 @@ import { useEffect, useRef } from 'react';
 import { useNavigationStore } from '../../../store/navigationStore';
 import MapComponent from '../../Map/Map';
 import styles from './Events.module.scss';
+import { useUserStore } from '@/store/userStore';
 
 export default function Events() {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const { setDarkNavigation } = useNavigationStore();
+  const user = useUserStore((state) => state.user);
 
   useEffect(() => {
     const handleScroll = () => {
