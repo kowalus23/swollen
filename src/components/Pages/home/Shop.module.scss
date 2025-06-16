@@ -40,4 +40,10 @@
     flex-direction: column;
     gap: 40px;
   }
+
+  .decorationImageContainer {
+    position: absolute;
+    bottom: 40px;
+    left: calc(100% + 20px);
+  }
 }
