@@ -97,5 +97,21 @@
         }
       }
     }
+
+
+    .decorationImageContainer {
+      position: absolute;
+      bottom: 40px;
+      transform: translateY(-50%);
+      left: -80px;
+      z-index: 2;
+    }
+
+    .decoration2ImageContainer {
+      position: absolute;
+      top: 40px;
+      left: calc(50% + 540px);
+      z-index: 2;
+    }
   }
 }

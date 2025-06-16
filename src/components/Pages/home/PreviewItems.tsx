@@ -45,6 +45,14 @@ export default function PreviewItems() {
             className={styles.image}
           />
         </div>
+
+        <div className={styles.decorationImageContainer}>
+          <Image className={styles.decorationImage} src="/images/fine-hand-image.png" alt="Sun" width={66} height={58} />
+        </div>
+
+        <div className={styles.decoration2ImageContainer}>
+          <Image className={styles.decorationImage} src="/images/cat-image.png" alt="Sun" width={127} height={115} />
+        </div>
       </div>
     </section>
   );
