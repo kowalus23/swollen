@@ -2,7 +2,11 @@ import type { FeatureCollection, Polygon } from 'geojson';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import Map, { Layer, Marker, Source } from 'react-map-gl/maplibre';
 
-const warsawCoords: [number, number] = [21.0122, 52.2297];
+interface MapComponentProps {
+  center?: [number, number];
+  zoom?: number;
+  radius?: number;
+}
 
 // Function to create a GeoJSON circle
 function createGeoJSONCircle(center: [number, number], radiusInKm: number, points = 64): FeatureCollection {
@@ -37,7 +41,8 @@ function createGeoJSONCircle(center: [number, number], radiusInKm: number, point
   };
 }
 
-const circleGeoJSON = createGeoJSONCircle(warsawCoords, 0.5);
+const defaultCoords: [number, number] = [21.0122, 52.2297];
+const defaultRadius = 0.5;
 
 const circleLayer = {
   id: 'circle-radius',
@@ -48,23 +53,30 @@ const circleLayer = {
   },
 };
 
-const MapComponent = () => (
-  <Map
-    mapLib={import('maplibre-gl')}
-    initialViewState={{
-      latitude: 52.2297,
-      longitude: 21.0122,
-      zoom: 14,
-    }}
-    style={{ width: '100%', height: 500 }}
-    mapStyle="https://api.maptiler.com/maps/dataviz/style.json?key=uWNFxjJhDlsLx0fsVbRg"
-    cooperativeGestures={true}
-  >
-    <Source id="circle-source" type="geojson" data={circleGeoJSON}>
-      <Layer {...circleLayer} />
-    </Source>
-    <Marker longitude={21.0122} latitude={52.2297} color="orange" />
-  </Map>
-);
+const MapComponent = ({ center, zoom, radius }: MapComponentProps) => {
+  const finalCenter = center || defaultCoords;
+  const finalZoom = zoom || 14;
+  const finalRadius = radius || defaultRadius;
+  const circleGeoJSON = createGeoJSONCircle(finalCenter, finalRadius);
+
+  return (
+    <Map
+      mapLib={import('maplibre-gl')}
+      initialViewState={{
+        latitude: finalCenter[1],
+        longitude: finalCenter[0],
+        zoom: finalZoom,
+      }}
+      style={{ width: '100%', height: 500 }}
+      mapStyle="https://api.maptiler.com/maps/dataviz/style.json?key=uWNFxjJhDlsLx0fsVbRg"
+      cooperativeGestures={true}
+    >
+      <Source id="circle-source" type="geojson" data={circleGeoJSON}>
+        <Layer {...circleLayer} />
+      </Source>
+      <Marker longitude={finalCenter[0]} latitude={finalCenter[1]} color="orange" />
+    </Map>
+  );
+};
 
 export default MapComponent;

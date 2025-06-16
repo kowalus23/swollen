@@ -1,0 +1,10 @@
+{
+  "title": "Wydarzenie",
+  "description": "Opis wydarzenia",
+  "pin": {
+    "longitude": 52.2297,
+    "latitude": 21.0122,
+    "startZoom": 14
+  },
+  "radiusInKm": 0.5
+}

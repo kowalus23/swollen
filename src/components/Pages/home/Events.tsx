@@ -1,6 +1,7 @@
 import { Button } from '@/components/Button/Button';
 import Image from 'next/image';
 
+import { useEventData } from '@/hooks/useEventData';
 import { useUserStore } from '@/store/userStore';
 import { useEffect, useRef } from 'react';
 import { useNavigationStore } from '../../../store/navigationStore';
@@ -11,6 +12,7 @@ export default function Events() {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const { setDarkNavigation } = useNavigationStore();
   const user = useUserStore((state) => state.user);
+  const { eventData, isLoading, error } = useEventData();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,6 +40,14 @@ export default function Events() {
     };
   }, [setDarkNavigation]);
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <section id="events" className={styles.eventsSection}>
       <div className={styles.gridBackground} />
@@ -57,15 +67,19 @@ export default function Events() {
             </div>
           ) : (
             <div className={styles.infoDetails}>
-              <h3>DROP EVENT DETAILS</h3>
+              <h3>{eventData?.title || 'DROP EVENT DETAILS'}</h3>
               <p>
-                W okolicy centrum Warszawy, możesz znaleźć nasze naklejki QR, które otwierają nam stronę z informacjami o kolejnym dropie.
+                {eventData?.description || 'W okolicy centrum Warszawy, możesz znaleźć nasze naklejki QR, które otwierają nam stronę z informacjami o kolejnym dropie.'}
               </p>
             </div>
           )}
         </div>
         <div ref={mapContainerRef} className={styles.mapContainer}>
-          <MapComponent />
+          <MapComponent
+            center={eventData?.pin ? [eventData.pin.latitude, eventData.pin.longitude] : undefined}
+            zoom={eventData?.pin?.startZoom}
+            radius={eventData?.radiusInKm}
+          />
         </div>
 
         <div className={styles.decorationImageContainer}>
