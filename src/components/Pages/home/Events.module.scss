@@ -88,5 +88,36 @@
         width: 100%;
       }
     }
+
+    .decorationImageContainer {
+      position: absolute;
+      top: calc(100% - 40px);
+      left: calc(50% + 300px);
+      z-index: 2;
+    }
+
+    .decoration2ImageContainer {
+      position: absolute;
+      top: calc(100% - 70px);
+      left: calc(50% + 260px);
+      transform: translateX(-50%);
+      z-index: 2;
+      filter: drop-shadow(0 0 10px #000000);
+      pointer-events: none;
+    }
+
+    .decoration3ImageContainer {
+      position: absolute;
+      top: calc(100% + 50px);
+      left: calc(50%);
+      transform: translateX(-50%);
+    }
+
+    .decoration4ImageContainer {
+      position: absolute;
+      top: calc(100% + 50px);
+      left: calc(50% - 360px);
+      transform: translateX(-50%);
+    }
   }
 }

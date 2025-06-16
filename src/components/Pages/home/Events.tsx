@@ -1,4 +1,6 @@
 import { Button } from '@/components/Button/Button';
+import Image from 'next/image';
+
 import { useUserStore } from '@/store/userStore';
 import { useEffect, useRef } from 'react';
 import { useNavigationStore } from '../../../store/navigationStore';
@@ -65,6 +67,23 @@ export default function Events() {
         <div ref={mapContainerRef} className={styles.mapContainer}>
           <MapComponent />
         </div>
+
+        <div className={styles.decorationImageContainer}>
+          <Image className={styles.decorationImage} src="/images/arrow-up-image.png" alt="Sun" width={115} height={103} />
+        </div>
+
+        <div className={styles.decoration2ImageContainer}>
+          <Image className={styles.decorationImage} src="/images/biceps-image.png" alt="Sun" width={150} height={170} />
+        </div>
+
+        <div className={styles.decoration3ImageContainer}>
+          <Image className={styles.decorationImage} src="/images/progress-biceps-image.png" alt="Sun" width={353} height={26} />
+        </div>
+
+        <div className={styles.decoration4ImageContainer}>
+          <Image className={styles.decorationImage} src="/images/progress-bar-image.png" alt="Sun" width={255} height={26} />
+        </div>
+
       </div>
     </section>
   );
