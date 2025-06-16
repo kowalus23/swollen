@@ -13,6 +13,7 @@ export default function PreviewItems() {
   return (
     <section id="aktualnosci" className={styles.previewItemsSection}>
       <div className={styles.previewItemsGridBackground} />
+      <div className={styles.previewItemsBackground} />
       <div className={styles.previewItemsContainer}>
         <div className={styles.previewItemsImages}>
           <Image
@@ -32,7 +33,7 @@ export default function PreviewItems() {
             {newCollection.additionalDescription}
           </p>
           <Button className={styles.button} variant='outline'>
-            ZOBACZ KOLEKCJĘ
+            POWIADOM MNIE O PREMIERZE
           </Button>
         </div>
         <div className={styles.previewItemsImages}>

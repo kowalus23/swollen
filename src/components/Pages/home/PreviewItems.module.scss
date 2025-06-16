@@ -9,11 +9,24 @@
 
   .previewItemsGridBackground {
     position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(to right,
+        transparent 0 38px,
+        #FFD60022 38px 40px),
+      repeating-linear-gradient(to bottom,
+        transparent 0 38px,
+        #FFD60022 38px 40px);
+    z-index: 1;
+  }
+
+  .previewItemsBackground {
+    position: absolute;
     top: 3rem;
     bottom: 3rem;
     left: 0;
     width: 100%;
-    background-color: #F6BA00;
+    background-color: #f9d102;
+    opacity: 0.7;
     z-index: 0;
   }
 
@@ -21,33 +34,35 @@
     position: relative;
     z-index: 1;
     display: flex;
-    gap: 4rem;
+    gap: 1rem;
     max-width: 1200px;
     width: 100%;
     align-items: center;
 
     @media (max-width: 768px) {
       flex-direction: column;
-      gap: 2rem;
     }
 
     .previewItemsContent {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1rem;
+      padding: 1rem 2rem;
       text-align: center;
 
       .title {
         font-size: 2.5rem;
+        line-height: 1;
         font-weight: bold;
         text-transform: uppercase;
         margin: 0;
+        text-shadow: 0 2px 4px #000000;
       }
 
       .description {
-        font-size: 1.1rem;
-        line-height: 1.6;
+        font-size: 1rem;
+        line-height: 1.4;
         margin: 0;
       }
 
