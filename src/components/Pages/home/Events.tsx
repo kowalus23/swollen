@@ -46,10 +46,12 @@ export default function Events() {
             <div className={styles.infoRegister}>
               <h3>REGISTER TO FOLLOW NEXT DROP</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-                quos.
+                Aby móc zobaczyć informacje o kolejnym dropie, musisz się zarejestrować.
               </p>
-              <Button variant='outline'>REGISTER</Button>
+              <Button
+                className={styles.registerButton} variant='outline'>
+                ZAREJESTRUJ SIĘ
+              </Button>
             </div>
           ) : (
             <div className={styles.infoDetails}>
