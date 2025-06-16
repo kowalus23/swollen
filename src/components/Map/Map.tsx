@@ -57,7 +57,8 @@ const MapComponent = () => (
       zoom: 14,
     }}
     style={{ width: '100%', height: 500 }}
-    mapStyle={`https://api.maptiler.com/maps/dataviz/style.json?key=uWNFxjJhDlsLx0fsVbRg`}
+    mapStyle="https://api.maptiler.com/maps/dataviz/style.json?key=uWNFxjJhDlsLx0fsVbRg"
+    cooperativeGestures={true}
   >
     <Source id="circle-source" type="geojson" data={circleGeoJSON}>
       <Layer {...circleLayer} />
