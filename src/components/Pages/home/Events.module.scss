@@ -8,7 +8,10 @@
   justify-content: center;
   height: 100vh;
   min-height: 600px;
-  max-height: 1080px;
+
+  @media (max-width: 480px) {
+    height: auto;
+  }
 
   .gridBackground {
     position: absolute;
@@ -39,6 +42,7 @@
     display: flex;
     justify-content: center;
     align-items: stretch;
+
 
     @media (max-width: 768px) {
       flex-direction: column;
@@ -94,6 +98,23 @@
       top: calc(100% - 40px);
       left: calc(50% + 300px);
       z-index: 2;
+
+      @media (max-width: 1000px) {
+        transform: scale(0.8);
+        left: calc(50% + 200px);
+      }
+
+      @media (max-width: 768px) {
+        transform: scale(0.6);
+        top: calc(100% - 60px);
+        left: calc(50% + 160px);
+      }
+
+      @media (max-width: 480px) {
+        transform: scale(0.4);
+        top: calc(100% - 50px);
+        left: calc(50% + 36px);
+      }
     }
 
     .decoration2ImageContainer {
@@ -104,6 +125,23 @@
       z-index: 2;
       filter: drop-shadow(0 0 10px #000000);
       pointer-events: none;
+
+      @media (max-width: 1000px) {
+        transform: scale(0.8);
+        left: calc(50% + 100px);
+      }
+
+      @media (max-width: 768px) {
+        transform: scale(0.6);
+        top: calc(100% - 90px);
+        left: calc(50% + 86px);
+      }
+
+      @media (max-width: 480px) {
+        transform: scale(0.4);
+        top: calc(100% - 70px);
+        left: calc(50% - 20px);
+      }
     }
 
     .decoration3ImageContainer {
@@ -111,6 +149,24 @@
       top: calc(100% + 50px);
       left: calc(50%);
       transform: translateX(-50%);
+
+      @media (max-width: 1000px) {
+        transform: scale(0.7);
+        top: calc(100% + 30px);
+        left: calc(50% - 200px);
+      }
+
+      @media (max-width: 768px) {
+        transform: scale(0.6);
+        top: calc(100% + 10px);
+        left: calc(50% - 160px);
+      }
+
+      @media (max-width: 480px) {
+        transform: scale(0.4);
+        top: calc(100% + 0px);
+        left: calc(50% - 220px);
+      }
     }
 
     .decoration4ImageContainer {
@@ -118,6 +174,25 @@
       top: calc(100% + 50px);
       left: calc(50% - 360px);
       transform: translateX(-50%);
+
+
+      @media (max-width: 1000px) {
+        transform: scale(0.7);
+        top: calc(100% + 30px);
+        left: calc(50% - 400px);
+      }
+
+      @media (max-width: 768px) {
+        transform: scale(0.5);
+        top: calc(100% + 10px);
+        left: calc(50% - 300px);
+      }
+
+      @media (max-width: 480px) {
+        transform: scale(0.4);
+        top: calc(100% + 16px);
+        left: calc(50% - 170px);
+      }
     }
   }
 }
