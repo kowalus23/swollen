@@ -123,12 +123,19 @@
     backdrop-filter: blur(10px);
     pointer-events: auto;
 
+
+    @media (max-width: 1300px) {
+      background-color: rgb(24, 24, 24, 0.4) !important
+    }
+
     @media (max-width: 500px) {
+      background-color: transparent !important;
       padding: 8px;
       display: flex;
       align-items: center;
       width: 100%;
     }
+
 
     &.darkNavigation {
       color: #000;
