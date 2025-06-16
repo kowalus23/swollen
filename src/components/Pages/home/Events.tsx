@@ -1,8 +1,9 @@
+import { Button } from '@/components/Button/Button';
+import { useUserStore } from '@/store/userStore';
 import { useEffect, useRef } from 'react';
 import { useNavigationStore } from '../../../store/navigationStore';
 import MapComponent from '../../Map/Map';
 import styles from './Events.module.scss';
-import { useUserStore } from '@/store/userStore';
 
 export default function Events() {
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -41,10 +42,23 @@ export default function Events() {
       <h1 className={styles.title}>EVENTS</h1>
       <div className={styles.content}>
         <div className={styles.info}>
-          <p className={styles.description}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-            quos.
-          </p>
+          {!user?.email ? (
+            <div className={styles.infoRegister}>
+              <h3>REGISTER TO FOLLOW NEXT DROP</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+                quos.
+              </p>
+              <Button variant='outline'>REGISTER</Button>
+            </div>
+          ) : (
+            <div className={styles.infoDetails}>
+              <h3>DROP EVENT DETAILS</h3>
+              <p>
+                W okolicy centrum Warszawy, możesz znaleźć nasze naklejki QR, które otwierają nam stronę z informacjami o kolejnym dropie.
+              </p>
+            </div>
+          )}
         </div>
         <div ref={mapContainerRef} className={styles.mapContainer}>
           <MapComponent />
