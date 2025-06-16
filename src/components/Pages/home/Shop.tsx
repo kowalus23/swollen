@@ -17,8 +17,6 @@ export default function Shop() {
         {data?.products?.map(product => (
           <ProductCard key={product.id} product={product} />
         ))}
-
-
         <div className={styles.decorationImageContainer}>
           <Image className={styles.decorationImage} src="/images/face-image.png" alt="Sun" width={100} height={100} />
         </div>
