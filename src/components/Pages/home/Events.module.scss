@@ -8,9 +8,11 @@
   justify-content: center;
   height: 100vh;
   min-height: 600px;
+  max-height: 1080px;
 
   @media (max-width: 480px) {
     height: auto;
+    max-height: unset;
   }
 
   .gridBackground {
@@ -96,7 +98,7 @@
     .decorationImageContainer {
       position: absolute;
       top: calc(100% - 40px);
-      left: calc(50% + 300px);
+      left: calc(50% + 400px);
       z-index: 2;
 
       @media (max-width: 1000px) {
@@ -120,7 +122,7 @@
     .decoration2ImageContainer {
       position: absolute;
       top: calc(100% - 70px);
-      left: calc(50% + 260px);
+      left: calc(50% + 360px);
       transform: translateX(-50%);
       z-index: 2;
       filter: drop-shadow(0 0 10px #000000);
@@ -147,7 +149,7 @@
     .decoration3ImageContainer {
       position: absolute;
       top: calc(100% + 50px);
-      left: calc(50%);
+      left: calc(50% + 70px);
       transform: translateX(-50%);
 
       @media (max-width: 1000px) {
@@ -172,7 +174,7 @@
     .decoration4ImageContainer {
       position: absolute;
       top: calc(100% + 50px);
-      left: calc(50% - 360px);
+      left: calc(50% - 320px);
       transform: translateX(-50%);
 
 
