@@ -1,5 +1,7 @@
 'use client';
 
+import { supabase } from '@/lib/supabase';
+import { useUserStore } from '@/store/userStore';
 import { flip, offset, shift, useFloating } from '@floating-ui/react';
 import { ArrowUpToLine, Calendar, List, Shirt } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -16,6 +18,9 @@ interface NavItem {
 }
 
 export const Navigation = () => {
+  const user = useUserStore((state) => state.user);
+  const setUser = useUserStore((state) => state.setUser);
+
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState<string>('top');
@@ -202,15 +207,29 @@ export const Navigation = () => {
           <div className={styles.indicator} />
         </div>
         <div className={styles.loginContainer}>
-          <Button
-            variant="outline"
-            className={[styles.loginButton, darkNavigation && styles.darkNavigation].join(' ')}
-            onClick={() => {
-              router.push('/logowanie');
-            }}
-          >
-            Wejdź do systemu
-          </Button>
+          {user?.email ? (
+            <Button
+              variant="outline"
+              className={[styles.loginButton, darkNavigation && styles.darkNavigation].join(' ')}
+              onClick={async () => {
+                await supabase.auth.signOut();
+                setUser(null);
+                router.push('/');
+              }}
+            >
+              Wyloguj się
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              className={[styles.loginButton, darkNavigation && styles.darkNavigation].join(' ')}
+              onClick={() => {
+                router.push('/logowanie');
+              }}
+            >
+              Wejdź do systemu
+            </Button>
+          )}
         </div>
       </div>
     </aside>

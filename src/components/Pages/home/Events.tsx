@@ -3,12 +3,14 @@ import Image from 'next/image';
 
 import { useEventData } from '@/hooks/useEventData';
 import { useUserStore } from '@/store/userStore';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { useNavigationStore } from '../../../store/navigationStore';
 import MapComponent from '../../Map/Map';
 import styles from './Events.module.scss';
 
 export default function Events() {
+  const router = useRouter();
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const { setDarkNavigation } = useNavigationStore();
   const user = useUserStore((state) => state.user);
@@ -61,8 +63,12 @@ export default function Events() {
                 Aby móc zobaczyć informacje o kolejnym dropie, musisz się zarejestrować.
               </p>
               <Button
-                className={styles.registerButton} variant='outline'>
-                ZAREJESTRUJ SIĘ
+                className={styles.registerButton} variant='outline'
+                onClick={() => {
+                  router.push('/logowanie');
+                }}
+              >
+                ZALOGUJ SIĘ
               </Button>
             </div>
           ) : (

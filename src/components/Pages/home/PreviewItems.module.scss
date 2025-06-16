@@ -1,30 +1,86 @@
 .previewItemsSection {
   position: relative;
-  overflow: hidden;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
-  min-height: 600px;
-  max-height: 1080px;
-  background-color: black;
-
-
-  .title {
-    font-size: 2.5rem;
-    font-weight: 700;
-  }
+  align-items: center;
+  padding: 4rem 2rem;
+  overflow: hidden;
 
   .previewItemsGridBackground {
     position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(to right,
-        transparent 0 38px,
-        #FFD60022 38px 40px),
-      repeating-linear-gradient(to bottom,
-        transparent 0 38px,
-        #FFD60022 38px 40px);
+    top: 3rem;
+    bottom: 3rem;
+    left: 0;
+    width: 100%;
+    background-color: #F6BA00;
+    z-index: 0;
+  }
+
+  .previewItemsContainer {
+    position: relative;
     z-index: 1;
+    display: flex;
+    gap: 4rem;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .previewItemsContent {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: center;
+
+      .title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      .description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      .additionalDescription {
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      .button {
+        margin-top: 1rem;
+      }
+    }
+
+    .previewItemsImages {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      max-width: 1000px;
+      width: 100%;
+
+      .image {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
   }
 }
