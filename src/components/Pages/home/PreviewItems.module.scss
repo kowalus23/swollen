@@ -4,6 +4,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 560px;
+  max-height: 1080px;
   padding: 4rem 2rem;
   overflow: hidden;
 
@@ -101,7 +103,7 @@
 
     .decorationImageContainer {
       position: absolute;
-      bottom: 40px;
+      bottom: 10px;
       transform: translateY(-50%);
       left: -80px;
       z-index: 2;
