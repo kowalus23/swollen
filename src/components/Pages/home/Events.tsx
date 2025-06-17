@@ -17,7 +17,7 @@ export default function Events() {
   const { eventData, isLoading, error } = useEventData();
 
   useEffect(() => {
-    const handleScroll = () => {
+    const changeNavigationOnScroll = () => {
       if (window.innerWidth < 500) {
         if (mapContainerRef.current) {
           const rect = mapContainerRef.current.getBoundingClientRect();
@@ -32,13 +32,13 @@ export default function Events() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
-    handleScroll();
+    window.addEventListener('scroll', changeNavigationOnScroll, { passive: true });
+    window.addEventListener('resize', changeNavigationOnScroll);
+    changeNavigationOnScroll();
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('scroll', changeNavigationOnScroll);
+      window.removeEventListener('resize', changeNavigationOnScroll);
     };
   }, [setDarkNavigation]);
 

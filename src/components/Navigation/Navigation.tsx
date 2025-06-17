@@ -46,8 +46,8 @@ export const Navigation = () => {
     const timeout = setTimeout(() => {
       const observerOptions = {
         root: null,
-        rootMargin: '-50% 0px',
-        threshold: 0
+        rootMargin: '0px',
+        threshold: 0.5
       };
 
       const observer = new IntersectionObserver((entries) => {
@@ -88,7 +88,7 @@ export const Navigation = () => {
         });
         window.removeEventListener('scroll', handleScroll);
       };
-    }, 50);
+    }, 250);
 
     return () => {
       clearTimeout(timeout);
