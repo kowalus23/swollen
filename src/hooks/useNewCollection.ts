@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 
 interface NewCollection {
+	hideSection: boolean;
 	description: string;
 	additionalDescription: string;
+	hideAdditionalDescription: boolean;
+	hideAdditionalDescriptionAt?: string;
 	previewImages: string[];
 }
 

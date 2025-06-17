@@ -12,6 +12,14 @@ export default function PreviewItems() {
     return null;
   }
 
+  const shouldHideAdditionalDescription = () => {
+    if (newCollection.hideAdditionalDescriptionAt && newCollection.hideAdditionalDescription) {
+      const hideDate = new Date(newCollection.hideAdditionalDescriptionAt);
+      return new Date() >= hideDate;
+    }
+    return false;
+  };
+
   return (
     <section id="aktualnosci" className={styles.previewItemsSection}>
       <div className={styles.previewItemsGridBackground} />
@@ -33,9 +41,11 @@ export default function PreviewItems() {
           <p className={styles.description}>
             {newCollection.description}
           </p>
-          <p className={styles.additionalDescription}>
-            {newCollection.additionalDescription}
-          </p>
+          {!shouldHideAdditionalDescription() && (
+            <p className={styles.additionalDescription}>
+              {newCollection.additionalDescription}
+            </p>
+          )}
           <Button className={styles.button} variant='outline'>
             POWIADOM MNIE O PREMIERZE
           </Button>

@@ -2,6 +2,8 @@
   "hideSection": false,
   "description": "LOREM IPSUM DOLOR SIT AMET CONSECTETUER ADIPISCING ELIT",
   "additionalDescription": "JUŻ OD WRZEŚNIA",
+  "hideAdditionalDescription": false,
+  "hideAdditionalDescriptionAt": "2025-06-06",
   "previewImages": [
     "https://i.imgur.com/DG47GhS.png",
     "https://i.imgur.com/8Wi9ZS5.png"
