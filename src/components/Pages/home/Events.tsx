@@ -80,7 +80,14 @@ export default function Events() {
             </div>
           )}
         </div>
-        <div ref={mapContainerRef} className={styles.mapContainer}>
+        <div
+          ref={mapContainerRef}
+          className={styles.mapContainer}
+          style={{
+            pointerEvents: user?.email ? 'auto' : 'none',
+            filter: user?.email ? 'none' : 'blur(2px) grayscale(100%)'
+          }}
+        >
           <MapComponent
             center={eventData?.pin ? [eventData.pin.latitude, eventData.pin.longitude] : undefined}
             zoom={eventData?.pin?.startZoom}
