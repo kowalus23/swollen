@@ -8,7 +8,7 @@ export default function PreviewItems() {
   const { data: newCollection, isLoading } = useNewCollection();
   const user = useUserStore((state) => state.user);
 
-  if (isLoading || !newCollection) {
+  if (isLoading || !newCollection || newCollection.hideSection) {
     return null;
   }
 
