@@ -46,18 +46,6 @@
     max-width: 640px;
     margin-bottom: 4rem;
   }
-
-  .backButton {
-    position: absolute;
-    bottom: calc(100%);
-    left: 0;
-
-    .button {
-      padding: 0.5rem 1rem;
-      font-size: 0.8rem;
-      font-weight: 300;
-    }
-  }
 }
 
 .title {
@@ -129,9 +117,9 @@
 
 .footer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 1rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
   width: 100%;
 
   @media (max-width: 500px) {

@@ -1,11 +1,9 @@
 'use client';
 
-import { Button } from '@/components/Button';
 import { ButtonStripe } from '@/components/Button/ButtonStripe';
 import Input from '@/components/Input/Input';
 import { supabase } from '@/lib/supabase';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -54,11 +52,6 @@ export default function LoginHero() {
 
   return (
     <div className={styles.loginWindow}>
-      <div className={styles.backButton}>
-        <Button variant='outline' className={styles.button} onClick={() => router.push('/')}>
-          <ArrowLeft />
-        </Button>
-      </div>
       <Image className={styles.logo} src="/images/logo.svg" alt="Logo" width={800} height={400} />
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.inputCustomBorder} />
@@ -78,9 +71,12 @@ export default function LoginHero() {
           WEJDŹ DO SYSTEMU
         </ButtonStripe>
       </form>
-      <div className={styles.footer}>
+      <div className={styles.links}>
         <Link href="/rejestracja">ZAREJESTRUJ SIĘ</Link>
         <Link href="/rejestracja">NIE PAMIĘTASZ HASŁA?</Link>
+      </div>
+      <div className={styles.footer}>
+        <Link href="/">WRÓĆ DO STRONY GŁÓWNEJ</Link>
       </div>
     </div>
   );
