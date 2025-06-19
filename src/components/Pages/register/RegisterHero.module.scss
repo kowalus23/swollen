@@ -16,6 +16,18 @@
     height: auto;
     max-width: 500px;
   }
+
+  .backButton {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+
+    .button {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 300;
+    }
+  }
 }
 
 .title {
