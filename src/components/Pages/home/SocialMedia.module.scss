@@ -103,11 +103,32 @@
       width: 100%;
       position: relative;
 
+      @media (max-width: 1000px) {
+        height: 270px;
+      }
+
+      @media (max-width: 620px) {
+        height: 210px;
+      }
+
       .makeYourMoveImage {
         object-fit: contain;
         position: absolute;
-        left: 2rem;
+        left: calc(50% - 460px);
+        transform: translateX(-50%);
         top: 0rem;
+
+        @media (max-width: 1000px) {
+          left: calc(50% - 260px);
+          width: 160px;
+          height: auto;
+        }
+
+        @media (max-width: 620px) {
+          top: 1rem;
+          left: calc(50% - 160px);
+          width: 80px;
+        }
       }
 
       .bigCatImage {
@@ -116,13 +137,37 @@
         top: 2rem;
         left: 50%;
         transform: translateX(-50%);
+        z-index: 1;
+
+        @media (max-width: 1000px) {
+          width: 360px;
+          height: auto;
+        }
+
+        @media (max-width: 620px) {
+          top: 1rem;
+          width: 300px;
+        }
       }
 
       .noRulesImage {
         object-fit: contain;
         position: absolute;
-        right: 20px;
+        left: calc(50% + 460px);
+        transform: translateX(-50%);
         top: 2rem;
+
+        @media (max-width: 1000px) {
+          left: calc(50% + 300px);
+          width: 160px;
+          height: auto;
+        }
+
+        @media (max-width: 620px) {
+          top: 1rem;
+          left: calc(50% + 160px);
+          width: 80px;
+        }
       }
     }
   }
