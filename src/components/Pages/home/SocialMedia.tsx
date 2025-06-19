@@ -1,4 +1,5 @@
-import { FacebookEmbed, InstagramEmbed, LinkedInEmbed } from 'react-social-media-embed';
+import Image from 'next/image';
+import { FacebookEmbed, InstagramEmbed, TikTokEmbed } from 'react-social-media-embed';
 import styles from './SocialMedia.module.scss';
 
 export default function SocialMedia() {
@@ -6,30 +7,29 @@ export default function SocialMedia() {
     <section className={styles.socialMediaSection}>
       <div className={styles.socialMediaGridBackground} />
       <div className={styles.socialMediaContent}>
-        <h2 className={styles.title}>ODIWEDŹ NAS W SOCIALACH!</h2>
+        <div className={styles.socialMediaTitle}>
+          <Image className={styles.titleImage} src="/images/socials-title-image.png" alt="title" width={562} height={52} />
+        </div>
         <p className={styles.description}>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure, nobis.
         </p>
         <div className={styles.socialMediaIcons}>
-          // icons
+          <div className={styles.socialMediaIcon}>
+            <Image src="/images/facebook-icon.svg" alt="icon" width={32} height={32} />
+          </div>
+          <div className={styles.socialMediaIcon}>
+            <Image src="/images/instagram-icon.svg" alt="icon" width={32} height={32} />
+          </div>
+          <div className={styles.socialMediaIcon}>
+            <Image src="/images/tiktok-icon.svg" alt="icon" width={32} height={32} />
+          </div>
         </div>
 
         <div className={styles.socialMediaSocials}>
           <div className={styles.socialMediaIconsRow}>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <InstagramEmbed url="https://www.instagram.com/p/CUbHfhpswxt/" width={328} />
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <LinkedInEmbed
-                url="https://www.linkedin.com/embed/feed/update/urn:li:share:6898694772484112384"
-                postUrl="https://www.linkedin.com/posts/peterdiamandis_5-discoveries-the-james-webb-telescope-will-activity-6898694773406875648-z-D7"
-                width={325}
-                height={570}
-              />
-            </div>
-          </div>
-          <div className={styles.socialMediaIconsRow}>
-            <FacebookEmbed url="https://www.facebook.com/andrewismusic/posts/451971596293956" width={550} />
+            <InstagramEmbed url="https://www.instagram.com/p/CUbHfhpswxt/" width={328} />
+            <TikTokEmbed url="https://www.tiktok.com/@epicgardening/video/7055411162212633903" width={325} />
+            <FacebookEmbed url="https://www.facebook.com/andrewismusic/posts/451971596293956" width={325} />
           </div>
         </div>
       </div>
