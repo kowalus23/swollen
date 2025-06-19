@@ -1,0 +1,25 @@
+.container {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+  background: linear-gradient(to bottom,
+      #000 0%,
+      #ffd50082 50%,
+      #000 100%);
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(50% - 7px);
+    height: 14px;
+    pointer-events: none;
+    z-index: 1;
+  }
+}

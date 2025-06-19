@@ -30,6 +30,7 @@ export const Navigation = () => {
   const { darkNavigation } = useNavigationStore();
 
   const isLoginPage = pathname.includes('/logowanie');
+  const isRegisterPage = pathname.includes('/rejestracja');
 
   useEffect(() => {
     const checkIfDesktop = () => {
@@ -158,7 +159,7 @@ export const Navigation = () => {
   ];
 
   return (
-    <aside className={`${styles.navigation} ${isLoginPage ? styles.hidden : ''}`}>
+    <aside className={`${styles.navigation} ${isLoginPage || isRegisterPage ? styles.hidden : ''}`}>
       <div className={styles.navigationContainer}>
         <div className={styles.container}>
           <div className={styles.navItems}>

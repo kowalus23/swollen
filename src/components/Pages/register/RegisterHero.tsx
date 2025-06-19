@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import styles from './LoginHero.module.scss';
+import styles from './RegisterHero.module.scss';
 
 const schema = z.object({
   email: z.string().email('Podaj poprawny e-mail'),
@@ -19,7 +19,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export default function LoginHero() {
+export default function RegisterHero() {
   const router = useRouter();
   const [error, setError] = useState('');
 
@@ -68,12 +68,11 @@ export default function LoginHero() {
           error={errors.password?.message}
         />
         <ButtonStripe type="submit" disabled={isSubmitting} className={styles.button}>
-          WEJDŹ DO SYSTEMU
+          ZAREJESTRUJ
         </ButtonStripe>
       </form>
       <div className={styles.footer}>
-        <Link href="/rejestracja">ZAREJESTRUJ SIĘ</Link>
-        <Link href="/rejestracja">NIE PAMIĘTASZ HASŁA?</Link>
+        <Link href="/logowanie">WRÓĆ DO LOGOWANIA</Link>
       </div>
     </div>
   );
