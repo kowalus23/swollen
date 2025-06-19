@@ -10,7 +10,9 @@ export default function Shop() {
   return (
     <section id="sklep" className={styles.shopSection}>
       <div className={styles.shopGridBackground} />
-      <h2 className={styles.title}>SKLEP</h2>
+      <div className={styles.shopTitle}>
+        <Image className={styles.titleImage} src="/images/shop-title-image.png" alt="Sun" width={246} height={67} />
+      </div>
       <div className={styles.products}>
         {isLoading && <div>Loading...</div>}
         {error && <div>Błąd ładowania produktów</div>}

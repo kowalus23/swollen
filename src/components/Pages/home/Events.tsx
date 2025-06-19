@@ -53,7 +53,9 @@ export default function Events() {
   return (
     <section id="events" className={styles.eventsSection}>
       <div className={styles.gridBackground} />
-      <h1 className={styles.title}>EVENTS</h1>
+      <div className={styles.eventsTitle}>
+        <Image className={styles.titleImage} src="/images/events-title-image.png" alt="Sun" width={246} height={67} />
+      </div>
       <div className={styles.content}>
         <div className={styles.info}>
           {!user?.email ? (

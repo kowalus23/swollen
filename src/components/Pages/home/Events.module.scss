@@ -26,12 +26,20 @@
         transparent 0 38px,
         #FFD60022 38px 40px);
     z-index: 1;
+    pointer-events: none;
   }
 
-  .title {
-    font-size: 2.5rem;
-    font-weight: 700;
+  .eventsTitle {
     margin-bottom: 2.5rem;
+
+    .titleImage {
+      width: 100%;
+
+      @media (max-width: 500px) {
+        height: auto;
+        width: 160px;
+      }
+    }
   }
 
   .content {
