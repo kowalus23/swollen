@@ -15,8 +15,19 @@ import { z } from 'zod';
 import styles from './RegisterHero.module.scss';
 
 const schema = z.object({
+  name: z.string().min(1, 'Imię jest wymagane'),
   email: z.string().email('Podaj poprawny e-mail'),
+  emailConfirm: z.string().email('Podaj poprawny e-mail'),
   password: z.string().min(6, 'Hasło musi mieć co najmniej 6 znaków'),
+  passwordConfirm: z.string().min(6, 'Hasło musi mieć co najmniej 6 znaków'),
+  phone: z.string().optional(),
+  somethingElse: z.string().optional(),
+}).refine((data) => data.email === data.emailConfirm, {
+  message: "E-maile nie są identyczne",
+  path: ["emailConfirm"],
+}).refine((data) => data.password === data.passwordConfirm, {
+  message: "Hasła nie są identyczne",
+  path: ["passwordConfirm"],
 });
 
 type FormData = z.infer<typeof schema>;
@@ -33,12 +44,19 @@ export default function RegisterHero() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (fromData: FormData) => {
+  const onSubmit = async (formData: FormData) => {
     setError('')
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: fromData.email,
-      password: fromData.password,
+    const { data, error } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+      options: {
+        data: {
+          name: formData.name,
+          phone: formData.phone,
+          something_else: formData.somethingElse,
+        }
+      }
     })
 
     if (error) {
