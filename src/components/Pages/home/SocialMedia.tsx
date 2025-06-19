@@ -1,10 +1,39 @@
 import { useSocials } from '@/hooks/useSocials';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { FacebookEmbed, InstagramEmbed, TikTokEmbed } from 'react-social-media-embed';
 import styles from './SocialMedia.module.scss';
 
 export default function SocialMedia() {
   const { data: socials, isLoading, error } = useSocials();
+  const [visibleEmbeds, setVisibleEmbeds] = useState({
+    instagram: false,
+    tiktok: false,
+    facebook: false
+  });
+
+  useEffect(() => {
+    if (socials) {
+      // Show Instagram immediately
+      if (socials.instagramUrl) {
+        setVisibleEmbeds(prev => ({ ...prev, instagram: true }));
+      }
+
+      // Show TikTok after 250ms
+      if (socials.tiktokUrl) {
+        setTimeout(() => {
+          setVisibleEmbeds(prev => ({ ...prev, tiktok: true }));
+        }, 250);
+      }
+
+      // Show Facebook after 500ms
+      if (socials.facebookUrl) {
+        setTimeout(() => {
+          setVisibleEmbeds(prev => ({ ...prev, facebook: true }));
+        }, 500);
+      }
+    }
+  }, [socials]);
 
   const handleSocialClick = (url: string) => {
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -36,7 +65,7 @@ export default function SocialMedia() {
     <section className={styles.socialMediaSection}>
       <div className={styles.socialMediaGridBackground} />
       <div className={styles.socialMediaContent}>
-        <Image className={styles.socialMediaContentBackgroundImage} src="/images/background-feed-image.png" alt="background" width={1700} height={785} />
+        <Image className={styles.socialMediaContentBackgroundImage} src="/images/background-feed-image.png" alt="background" width={1700} height={995} />
         <div className={styles.socialMediaTitle}>
           <Image className={styles.titleImage} src="/images/socials-title-image.png" alt="title" width={562} height={52} />
         </div>
@@ -75,13 +104,13 @@ export default function SocialMedia() {
 
         <div className={styles.socialMediaSocials}>
           <div className={styles.socialMediaIconsRow}>
-            {socials.instagramUrl && (
+            {socials.instagramUrl && visibleEmbeds.instagram && (
               <InstagramEmbed url={socials.instagramUrl} width={328} />
             )}
-            {socials.tiktokUrl && (
+            {socials.tiktokUrl && visibleEmbeds.tiktok && (
               <TikTokEmbed url={socials.tiktokUrl} width={325} />
             )}
-            {socials.facebookUrl && (
+            {socials.facebookUrl && visibleEmbeds.facebook && (
               <FacebookEmbed url={socials.facebookUrl} width={325} />
             )}
           </div>
