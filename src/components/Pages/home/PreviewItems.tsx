@@ -37,7 +37,9 @@ export default function PreviewItems() {
           </div>
         )}
         <div className={styles.previewItemsContent}>
-          <h2 className={styles.title}>NOWA KOLEKCJA</h2>
+          <div className={styles.previewItemsTitle}>
+            <Image className={styles.titleImage} src="/images/new-collection-title-image.png" alt="title" width={523} height={69} />
+          </div>
           <p className={styles.description}>
             {newCollection.description}
           </p>
