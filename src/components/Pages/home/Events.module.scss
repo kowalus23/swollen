@@ -93,7 +93,10 @@
           text-transform: uppercase;
           color: #F6BA00;
           line-height: 1;
-          ;
+
+          @media (max-width: 500px) {
+            font-size: 2.5rem;
+          }
         }
 
         .infoRegisterDescription {
