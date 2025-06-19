@@ -1,8 +1,37 @@
+import { useSocials } from '@/hooks/useSocials';
 import Image from 'next/image';
 import { FacebookEmbed, InstagramEmbed, TikTokEmbed } from 'react-social-media-embed';
 import styles from './SocialMedia.module.scss';
 
 export default function SocialMedia() {
+  const { data: socials, isLoading, error } = useSocials();
+
+  const handleSocialClick = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  if (isLoading) {
+    return (
+      <section className={styles.socialMediaSection}>
+        <div className={styles.socialMediaGridBackground} />
+        <div className={styles.socialMediaContent}>
+          <p>Loading social media...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error || !socials) {
+    return (
+      <section className={styles.socialMediaSection}>
+        <div className={styles.socialMediaGridBackground} />
+        <div className={styles.socialMediaContent}>
+          <p>Error loading social media</p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className={styles.socialMediaSection}>
       <div className={styles.socialMediaGridBackground} />
@@ -14,25 +43,55 @@ export default function SocialMedia() {
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure, nobis.
         </p>
         <div className={styles.socialMediaIcons}>
-          <div className={styles.socialMediaIcon}>
-            <Image src="/images/facebook-icon.svg" alt="icon" width={32} height={32} />
-          </div>
-          <div className={styles.socialMediaIcon}>
-            <Image src="/images/instagram-icon.svg" alt="icon" width={32} height={32} />
-          </div>
-          <div className={styles.socialMediaIcon}>
-            <Image src="/images/tiktok-icon.svg" alt="icon" width={32} height={32} />
-          </div>
+          {socials.facebookUrl && (
+            <div
+              className={styles.socialMediaIcon}
+              onClick={() => handleSocialClick(socials.facebookUrl)}
+              style={{ cursor: 'pointer' }}
+            >
+              <Image src="/images/facebook-icon.svg" alt="icon" width={32} height={32} />
+            </div>
+          )}
+          {socials.instagramUrl && (
+            <div
+              className={styles.socialMediaIcon}
+              onClick={() => handleSocialClick(socials.instagramUrl)}
+              style={{ cursor: 'pointer' }}
+            >
+              <Image src="/images/instagram-icon.svg" alt="icon" width={32} height={32} />
+            </div>
+          )}
+          {socials.tiktokUrl && (
+            <div
+              className={styles.socialMediaIcon}
+              onClick={() => handleSocialClick(socials.tiktokUrl)}
+              style={{ cursor: 'pointer' }}
+            >
+              <Image src="/images/tiktok-icon.svg" alt="icon" width={32} height={32} />
+            </div>
+          )}
         </div>
 
         <div className={styles.socialMediaSocials}>
           <div className={styles.socialMediaIconsRow}>
-            <InstagramEmbed url="https://www.instagram.com/p/CUbHfhpswxt/" width={328} />
-            <TikTokEmbed url="https://www.tiktok.com/@epicgardening/video/7055411162212633903" width={325} />
-            <FacebookEmbed url="https://www.facebook.com/andrewismusic/posts/451971596293956" width={325} />
+            {socials.instagramUrl && (
+              <InstagramEmbed url={socials.instagramUrl} width={328} />
+            )}
+            {socials.tiktokUrl && (
+              <TikTokEmbed url={socials.tiktokUrl} width={325} />
+            )}
+            {socials.facebookUrl && (
+              <FacebookEmbed url={socials.facebookUrl} width={325} />
+            )}
           </div>
         </div>
+
+        <div className={styles.footerImages}>
+          <Image className={styles.makeYourMoveImage} src="/images/make-your-move-image.png" alt="footer-image-1" width={320} height={340} />
+          <Image className={styles.bigCatImage} src="/images/big-cat-image.png" alt="footer-image-1" width={600} height={400} />
+          <Image className={styles.noRulesImage} src="/images/no-rules-image.png" alt="footer-image-2" width={382} height={266} />
+        </div>
       </div>
-    </section >
+    </section>
   );
 }

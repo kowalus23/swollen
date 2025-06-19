@@ -42,7 +42,6 @@ export default async function RootLayout({
             `,
           }}
         />
-        <script src="https://static.elfsight.com/platform/platform.js" async></script>
       </head>
       <body
         cz-shortcut-listen="true"

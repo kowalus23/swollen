@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   min-height: 600px;
-  padding: 4rem 0;
+  padding: 4rem 0 0;
 
   .socialMediaGridBackground {
     position: absolute;
@@ -94,6 +94,35 @@
         &>div {
           background-color: #ffffff;
         }
+      }
+    }
+
+    .footerImages {
+      background-color: transparent;
+      height: 430px;
+      width: 100%;
+      position: relative;
+
+      .makeYourMoveImage {
+        object-fit: contain;
+        position: absolute;
+        left: 2rem;
+        top: 0rem;
+      }
+
+      .bigCatImage {
+        object-fit: contain;
+        position: absolute;
+        top: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .noRulesImage {
+        object-fit: contain;
+        position: absolute;
+        right: 20px;
+        top: 2rem;
       }
     }
   }
