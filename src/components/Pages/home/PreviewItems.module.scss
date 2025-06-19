@@ -126,15 +126,16 @@
       z-index: 2;
 
       @media (max-width: 768px) {
-        left: 50%;
-        left: unset;
+        left: 20px;
         bottom: unset;
-        top: -60px;
-        transform: translate(-50%, -50%) scale(0.85);
+        bottom: 30px;
       }
 
       @media (max-width: 500px) {
         transform: scale(0.7);
+        left: -20px;
+        top: unset;
+        bottom: 60px;
       }
     }
 
