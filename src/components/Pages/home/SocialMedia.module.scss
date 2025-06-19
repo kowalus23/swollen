@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   min-height: 600px;
-  padding: 4rem 0 0;
+  padding: 10rem 0 0;
 
   .socialMediaGridBackground {
     position: absolute;
@@ -29,6 +29,16 @@
     align-items: center;
     width: 100%;
     max-width: 1920px;
+
+    .socialMediaContentBackgroundImage {
+      position: absolute;
+      top: -7rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+      opacity: 0.8;
+      pointer-events: none;
+    }
 
     .socialMediaTitle {
       .titleImage {

@@ -36,6 +36,7 @@ export default function SocialMedia() {
     <section className={styles.socialMediaSection}>
       <div className={styles.socialMediaGridBackground} />
       <div className={styles.socialMediaContent}>
+        <Image className={styles.socialMediaContentBackgroundImage} src="/images/background-feed-image.png" alt="background" width={1700} height={785} />
         <div className={styles.socialMediaTitle}>
           <Image className={styles.titleImage} src="/images/socials-title-image.png" alt="title" width={562} height={52} />
         </div>
