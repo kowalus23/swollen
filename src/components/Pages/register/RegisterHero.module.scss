@@ -1,4 +1,33 @@
+.extraImage {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  max-width: 1920px;
+  margin: 0 auto;
+
+  .extraImageImage {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+
+    @media (max-width: 500px) {
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 150px;
+    }
+
+    @media (max-width: 380px) {
+      top: 0.5rem;
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
+
 .loginWindow {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,18 +38,20 @@
   backdrop-filter: blur(10px);
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 500px;
+  max-width: 560px;
+  overflow: auto;
 
   .logo {
     width: 100%;
     height: auto;
-    max-width: 500px;
+    max-width: 640px;
+    margin-bottom: 4rem;
   }
 
   .backButton {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    bottom: calc(100%);
+    left: 0;
 
     .button {
       padding: 0.5rem 1rem;
@@ -43,6 +74,15 @@
   gap: 1rem;
   position: relative;
   width: 100%;
+
+  .inputRow {
+    display: flex;
+    gap: 1rem;
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+    }
+  }
 
   .inputCustomBorder {
     position: absolute;

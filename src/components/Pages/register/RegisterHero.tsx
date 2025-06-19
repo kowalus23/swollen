@@ -53,34 +53,75 @@ export default function RegisterHero() {
   }
 
   return (
-    <div className={styles.loginWindow}>
-      <div className={styles.backButton}>
-        <Button variant='outline' className={styles.button} onClick={() => router.push('/')}>
-          <ArrowLeft />
-        </Button>
+    <>
+      <div className={styles.extraImage}>
+        <Image className={styles.extraImageImage} src="/images/register-corner-image.png" alt="background" width={250} height={250} />
       </div>
-      <Image className={styles.logo} src="/images/logo.svg" alt="Logo" width={800} height={400} style={{ marginBottom: 24 }} />
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <div className={styles.inputCustomBorder} />
-        <Input
-          label="E-MAIL"
-          type="email"
-          {...register('email')}
-          error={errors.email?.message}
-        />
-        <Input
-          label="HASŁO"
-          type="password"
-          {...register('password')}
-          error={errors.password?.message}
-        />
-        <ButtonStripe type="submit" disabled={isSubmitting} className={styles.button}>
-          ZAREJESTRUJ
-        </ButtonStripe>
-      </form>
-      <div className={styles.footer}>
-        <Link href="/logowanie">WRÓĆ DO LOGOWANIA</Link>
+      <div className={styles.loginWindow}>
+        <div className={styles.backButton}>
+          <Button variant='outline' className={styles.button} onClick={() => router.push('/')}>
+            <ArrowLeft />
+          </Button>
+        </div>
+        <Image className={styles.logo} src="/images/register-title.png" alt="Logo" width={640} height={80} />
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+          <div className={styles.inputCustomBorder} />
+          <Input
+            label="IMIĘ"
+            type="text"
+            {...register('name')}
+            error={errors.name?.message}
+          />
+          <Input
+            label="E-MAIL"
+            type="email"
+            {...register('email')}
+            error={errors.email?.message}
+          />
+          <Input
+            label="Powtórz e-mail"
+            type="email"
+            {...register('emailConfirm')}
+            error={errors.emailConfirm?.message}
+          />
+          <div className={styles.inputRow}>
+            <Input
+              label="HASŁO"
+              type="password"
+              {...register('password')}
+              error={errors.password?.message}
+            />
+            <Input
+              label="Powtórz hasło"
+              type="password"
+              {...register('passwordConfirm')}
+              error={errors.passwordConfirm?.message}
+            />
+          </div>
+
+          <div className={styles.inputRow}>
+            <Input
+              label="Telefon"
+              type="tel"
+              {...register('phone')}
+              error={errors.phone?.message}
+            />
+            <Input
+              label="Coś jeszcze ???"
+              type="text"
+              {...register('somethingElse')}
+              error={errors.somethingElse?.message}
+            />
+          </div>
+
+          <ButtonStripe type="submit" disabled={isSubmitting} className={styles.button}>
+            ZAREJESTRUJ
+          </ButtonStripe>
+        </form>
+        <div className={styles.footer}>
+          <Link href="/logowanie">WRÓĆ DO LOGOWANIA</Link>
+        </div>
       </div>
-    </div>
+    </>
   );
 } 

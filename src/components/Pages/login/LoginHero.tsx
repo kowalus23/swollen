@@ -59,7 +59,7 @@ export default function LoginHero() {
           <ArrowLeft />
         </Button>
       </div>
-      <Image className={styles.logo} src="/images/logo.svg" alt="Logo" width={800} height={400} style={{ marginBottom: 24 }} />
+      <Image className={styles.logo} src="/images/logo.svg" alt="Logo" width={800} height={400} />
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.inputCustomBorder} />
         <Input

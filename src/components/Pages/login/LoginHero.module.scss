@@ -1,4 +1,5 @@
 .loginWindow {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,18 +10,19 @@
   backdrop-filter: blur(10px);
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 500px;
+  max-width: 560px;
 
   .logo {
     width: 100%;
     height: auto;
     max-width: 500px;
+    margin-top: -2rem;
   }
 
   .backButton {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    bottom: calc(100%);
+    left: 0;
 
     .button {
       padding: 0.5rem 1rem;
