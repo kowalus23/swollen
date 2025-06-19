@@ -2,8 +2,16 @@ import { Navigation } from "@/components/Navigation/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop/ScrollToTop";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import localFont from 'next/font/local';
 import "./globals.scss";
 import { RootProvider } from "./providers/root-provider";
+
+const brushed = localFont({
+  src: './fonts/edosz.ttf',
+  display: 'swap',
+  fallback: ['system-ui'],
+  variable: '--font-edosz',
+})
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,7 +31,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${poppins.variable} ${brushed.variable}`}
+    >
       <head>
         <meta name="theme-color" content="#000000" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -45,7 +56,7 @@ export default async function RootLayout({
       </head>
       <body
         cz-shortcut-listen="true"
-        className={`${poppins.variable} antialiased`}
+        className={`antialiased`}
       >
         <RootProvider>
           <ScrollToTop />

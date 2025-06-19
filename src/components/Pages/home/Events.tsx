@@ -60,8 +60,8 @@ export default function Events() {
         <div className={styles.info}>
           {!user?.email ? (
             <div className={styles.infoRegister}>
-              <h3>REGISTER TO FOLLOW NEXT DROP</h3>
-              <p>
+              <h3 className={styles.infoRegisterTitle}>REGISTER TO FOLLOW NEXT DROP</h3>
+              <p className={styles.infoRegisterDescription}>
                 Aby móc zobaczyć informacje o kolejnym dropie, musisz się zarejestrować.
               </p>
               <Button
