@@ -38,6 +38,7 @@
       padding: 1rem 0;
       pointer-events: auto;
       z-index: 1;
+      background-color: rgba(0, 0, 0, 0.5);
 
       @media (max-width: 500px) {
         width: 100%;
@@ -63,6 +64,7 @@
           align-items: center;
           width: fit-content;
           padding: 0.75rem 1.2rem;
+          pointer-events: none;
 
           .button {
             transition: color 0.2s ease;
@@ -71,6 +73,7 @@
             outline: none;
             cursor: pointer;
             padding: 0 1.2rem;
+            pointer-events: auto;
           }
         }
       }
@@ -124,23 +127,13 @@
     text-transform: uppercase;
     backdrop-filter: blur(10px);
     pointer-events: auto;
-
-
-    @media (max-width: 1300px) {
-      background-color: rgb(24, 24, 24, 0.4) !important
-    }
+    background-color: rgba(0, 0, 0, 0.5) !important;
 
     @media (max-width: 500px) {
-      background-color: transparent !important;
       padding: 8px;
       display: flex;
       align-items: center;
       width: 100%;
-    }
-
-
-    &.darkNavigation {
-      color: #000;
     }
   }
 }

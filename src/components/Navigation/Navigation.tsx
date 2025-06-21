@@ -6,7 +6,6 @@ import { flip, offset, shift, useFloating } from '@floating-ui/react';
 import { ArrowUpToLine, Calendar, List, Shirt } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useNavigationStore } from '../../store/navigationStore';
 import { Button } from '../Button';
 import NewsCard from '../Pages/home/NewsCard';
 import styles from './Navigation.module.scss';
@@ -28,7 +27,6 @@ export const Navigation = () => {
   const [isDesktop, setIsDesktop] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const { darkNavigation } = useNavigationStore();
 
   const isLoginPage = pathname.includes('/logowanie');
   const isRegisterPage = pathname.includes('/rejestracja');
@@ -90,7 +88,7 @@ export const Navigation = () => {
         });
         window.removeEventListener('scroll', handleScroll);
       };
-    }, 250);
+    }, 1000);
 
     return () => {
       clearTimeout(timeout);
@@ -171,7 +169,7 @@ export const Navigation = () => {
                 middleware: [offset(12), shift(), flip()],
               });
               const isActive = activeSection === item.id;
-              const iconColor = hovered === item.id || isActive ? '#ffbf00' : darkNavigation ? '#000' : '#fff';
+              const iconColor = hovered === item.id || isActive ? '#ffbf00' : '#fff';
               return (
                 <div key={item.id} className={styles.navItem}>
                   <button
@@ -213,7 +211,7 @@ export const Navigation = () => {
           {user?.email ? (
             <Button
               variant="outline"
-              className={[styles.loginButton, darkNavigation && styles.darkNavigation].join(' ')}
+              className={[styles.loginButton].join(' ')}
               onClick={async () => {
                 await supabase.auth.signOut();
                 setUser(null);
@@ -225,7 +223,7 @@ export const Navigation = () => {
           ) : (
             <Button
               variant="outline"
-              className={[styles.loginButton, darkNavigation && styles.darkNavigation].join(' ')}
+              className={[styles.loginButton].join(' ')}
               onClick={() => {
                 router.push('/logowanie');
               }}
