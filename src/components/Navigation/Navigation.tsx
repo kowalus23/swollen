@@ -8,6 +8,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useNavigationStore } from '../../store/navigationStore';
 import { Button } from '../Button';
+import NewsCard from '../Pages/home/NewsCard';
 import styles from './Navigation.module.scss';
 
 interface NavItem {
@@ -161,6 +162,7 @@ export const Navigation = () => {
   return (
     <aside className={`${styles.navigation} ${isLoginPage || isRegisterPage ? styles.hidden : ''}`}>
       <div className={styles.navigationContainer}>
+        <NewsCard />
         <div className={styles.container}>
           <div className={styles.navItems}>
             {navItems.map((item) => {
