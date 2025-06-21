@@ -1,6 +1,7 @@
 'use client';
 
 import { supabase } from '@/lib/supabase';
+import { HomeSection, useHomeSectionStore } from '@/store/homeSectionStore';
 import { useUserStore } from '@/store/userStore';
 import { flip, offset, shift, useFloating } from '@floating-ui/react';
 import { ArrowUpToLine, Calendar, List, Shirt } from 'lucide-react';
@@ -24,11 +25,15 @@ export const Navigation = () => {
 
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
-  const [activeSection, setActiveSection] = useState<string>('top');
+  const [activeSection, setActiveSection] = useState<HomeSection>(HomeSection.HERO);
   const [isDesktop, setIsDesktop] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const { darkNavigation } = useNavigationStore();
+  const { currentSection, setCurrentSection } = useHomeSectionStore();
+
+  console.log(currentSection);
+
 
   const isLoginPage = pathname.includes('/logowanie');
   const isRegisterPage = pathname.includes('/rejestracja');
@@ -44,58 +49,6 @@ export const Navigation = () => {
     return () => window.removeEventListener('resize', checkIfDesktop);
   }, []);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.5
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (window.scrollY === 0) {
-              setActiveSection('top');
-            } else {
-              setActiveSection(entry.target.id);
-            }
-          }
-        });
-      }, observerOptions);
-
-      const sections = ['top', 'sklep', 'events', 'aktualnosci'];
-      sections.forEach((id) => {
-        const element = document.getElementById(id);
-        if (element) {
-          observer.observe(element);
-        }
-      });
-
-      // Add scroll event listener for top detection
-      const handleScroll = () => {
-        if (window.scrollY === 0) {
-          setActiveSection('top');
-        }
-      };
-      window.addEventListener('scroll', handleScroll);
-
-      // Cleanup
-      return () => {
-        sections.forEach((id) => {
-          const element = document.getElementById(id);
-          if (element) {
-            observer.unobserve(element);
-          }
-        });
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }, 250);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, []);
 
   const scrollToSection = (sectionId: string) => {
     if (pathname !== '/') {
@@ -122,7 +75,6 @@ export const Navigation = () => {
       label: 'Strona główna',
       id: 'top',
       onClick: () => {
-        setActiveSection('top');
         if (pathname === '/') {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
@@ -135,7 +87,6 @@ export const Navigation = () => {
       label: 'Sklep',
       id: 'sklep',
       onClick: () => {
-        setActiveSection('sklep');
         scrollToSection('sklep');
       }
     },
@@ -144,7 +95,6 @@ export const Navigation = () => {
       label: 'Events',
       id: 'events',
       onClick: () => {
-        setActiveSection('events');
         scrollToSection('events');
       }
     },
@@ -153,7 +103,6 @@ export const Navigation = () => {
       label: 'Aktualności',
       id: 'aktualnosci',
       onClick: () => {
-        setActiveSection('aktualnosci');
         scrollToSection('aktualnosci');
       }
     },

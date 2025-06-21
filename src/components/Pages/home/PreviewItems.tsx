@@ -2,14 +2,45 @@ import { Button } from '@/components/Button';
 import { useNewCollection } from '@/hooks/useNewCollection';
 import { useUserStore } from '@/store/userStore';
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
+import { HomeSection, useHomeSectionStore } from '../../../store/homeSectionStore';
 import styles from './PreviewItems.module.scss';
 
 export default function PreviewItems() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { setCurrentSection } = useHomeSectionStore();
   const { data: newCollection, isLoading } = useNewCollection();
   const user = useUserStore((state) => state.user);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setCurrentSection(HomeSection.PREVIEW_ITEMS);
+        }
+      },
+      {
+        threshold: 0.3,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, [setCurrentSection]);
+
   if (isLoading || !newCollection || newCollection.hideSection) {
-    return null;
+    return (
+      <section ref={sectionRef} id="aktualnosci" className={styles.previewItemsSection}>
+        {/* Section is hidden or loading */}
+      </section>
+    );
   }
 
   const shouldHideAdditionalDescription = () => {
@@ -21,7 +52,7 @@ export default function PreviewItems() {
   };
 
   return (
-    <section id="aktualnosci" className={styles.previewItemsSection}>
+    <section ref={sectionRef} id="aktualnosci" className={styles.previewItemsSection}>
       <div className={styles.previewItemsGridBackground} />
       <div className={styles.previewItemsBackground} />
       <div className={styles.previewItemsContainer}>

@@ -5,6 +5,7 @@ import { useEventData } from '@/hooks/useEventData';
 import { useUserStore } from '@/store/userStore';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
+import { HomeSection, useHomeSectionStore } from '../../../store/homeSectionStore';
 import { useNavigationStore } from '../../../store/navigationStore';
 import MapComponent from '../../Map/Map';
 import styles from './Events.module.scss';
@@ -12,9 +13,34 @@ import styles from './Events.module.scss';
 export default function Events() {
   const router = useRouter();
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const { setDarkNavigation } = useNavigationStore();
+  const { setCurrentSection } = useHomeSectionStore();
   const user = useUserStore((state) => state.user);
   const { eventData, isLoading, error } = useEventData();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setCurrentSection(HomeSection.EVENTS);
+        }
+      },
+      {
+        threshold: 0.3,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, [setCurrentSection]);
 
   useEffect(() => {
     const changeNavigationOnScroll = () => {
@@ -43,15 +69,23 @@ export default function Events() {
   }, [setDarkNavigation]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <section ref={sectionRef} id="events" className={styles.eventsSection}>
+        <div>Loading...</div>
+      </section>
+    );
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <section ref={sectionRef} id="events" className={styles.eventsSection}>
+        <div>Error: {error}</div>
+      </section>
+    );
   }
 
   return (
-    <section id="events" className={styles.eventsSection}>
+    <section ref={sectionRef} id="events" className={styles.eventsSection}>
       <div className={styles.gridBackground} />
       <div className={styles.eventsTitle}>
         <Image className={styles.titleImage} src="/images/events-title-image.png" alt="Sun" width={246} height={67} />
