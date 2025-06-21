@@ -3,13 +3,16 @@
   overflow: hidden;
   display: flex;
   height: 100vh;
-  min-height: 1080px;
-  max-height: 1080px;
+  max-height: 800px;
   position: relative;
   background: linear-gradient(to bottom,
       #000 0%,
       #ffc30082 50%,
       #000 100%);
+
+  @media (max-width: 500px) {
+    max-height: 700px;
+  }
 
   &::after {
     content: '';
@@ -27,7 +30,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: calc(50% - 7px);
+    top: 500px;
     height: 16px;
     background: radial-gradient(ellipse at center, rgb(255 221 118) 0%, transparent 75%);
     pointer-events: none;
@@ -35,7 +38,7 @@
 
     @media (max-width: 500px) {
       height: 20px;
-      top: calc(50% - 10px);
+      top: 450px;
     }
   }
 
@@ -53,7 +56,7 @@
 
   .sunContainer {
     position: absolute;
-    top: calc(50% - 150px);
+    top: 360px;
     right: 50%;
     transform: translateX(50%);
 
@@ -68,7 +71,7 @@
     }
 
     @media (max-width: 500px) {
-      top: calc(50% - 120px);
+      top: 340px;
     }
   }
 

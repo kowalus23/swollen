@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import styles from './Hero.module.scss';
-import NewsCard from './NewsCard';
 
 export default function Hero() {
   return (
