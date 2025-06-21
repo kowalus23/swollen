@@ -12,7 +12,7 @@
   box-shadow: 0 0 24px 2px #FFD60055;
 
   opacity: 0;
-  animation: fadeIn 1s 300ms ease-in-out forwards;
+  animation: fadeIn 500ms 150ms ease-in-out forwards;
 
   transition: all 0.5s ease-in-out;
   overflow: hidden;
@@ -46,7 +46,7 @@
       animation: pulse 1.5s infinite;
 
       @media (max-width: 500px) {
-        font-size: 24px;
+        font-size: 20px;
       }
     }
   }
@@ -113,29 +113,36 @@
 
     .content {
       opacity: 1;
-      transition: opacity 0.5s 0.3s ease-in-out;
+      transition: opacity 300ms 150ms ease-in-out;
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 500px) {
+    top: 51px;
+    left: 0rem;
+    z-index: 1;
+    height: 33px;
+    width: 33px;
+
     &.expanded {
       padding: 18px 10px 16px 10px;
       min-width: unset;
-      max-width: 98vw;
+      max-width: 100%;
 
       .title {
         font-size: 1.2rem;
       }
 
       .iconBox {
-        width: 36px;
-        height: 36px;
+        width: 29px;
+        height: 29px;
+
+        .icon {
+          font-size: 20px;
+
+        }
       }
     }
-  }
-
-  @media (max-width: 500px) {
-    left: 1rem;
   }
 }
 
