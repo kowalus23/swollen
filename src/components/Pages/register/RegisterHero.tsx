@@ -51,8 +51,9 @@ export default function RegisterHero() {
       options: {
         data: {
           name: formData.name,
+          email: formData.email,
           phone: formData.phone,
-          something_else: formData.somethingElse,
+          extra: formData.somethingElse,
         }
       }
     })
