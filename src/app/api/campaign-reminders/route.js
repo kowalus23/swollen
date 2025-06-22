@@ -5,7 +5,7 @@ const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
 
-const REMINDER_DAYS = [7, 3, 1];
+const REMINDER_DAYS = [7, 1];
 
 export async function POST(req) {
 	const { email, campaignName, campaignStartAt } = await req.json();
@@ -28,7 +28,7 @@ export async function POST(req) {
 	}
 
 	if (existing && existing.length > 0) {
-		return NextResponse.json({ error: "You are already on the notification list for this campaign." }, { status: 409 });
+		return NextResponse.json({ error: "Jesteś już na liście powiadomień dla tej kolekcji." }, { status: 409 });
 	}
 
 	// 2. Add new reminders
@@ -55,7 +55,7 @@ export async function POST(req) {
 	).toLocaleDateString()}</strong>.</p><p><a href="${APP_URL}" target="_blank" rel="noopener">Visit our app</a></p>`;
 
 	try {
-		const emailResponse = await fetch(`/api/send-email`, {
+		const emailResponse = await fetch(`${APP_URL}/api/send-email`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ to: email, subject, text, html }),
