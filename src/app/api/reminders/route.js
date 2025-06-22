@@ -1,6 +1,6 @@
 // app/api/reminders/route.js
 import { createClient } from "@supabase/supabase-js";
-import { formatISO, subDays } from "date-fns";
+import { DateTime } from "luxon";
 import { NextResponse } from "next/server";
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY);
@@ -17,9 +17,10 @@ export async function GET() {
 		return NextResponse.json({ error: error.message }, { status: 500 });
 	}
 
-	const today = formatISO(new Date(), { representation: "date" });
+	const today = DateTime.now().toISODate();
 	const toSend = data.filter((rec) => {
-		const sendDate = formatISO(subDays(new Date(rec.campaign_start_at), rec.days_before), { representation: "date" });
+		const campaignStartDate = DateTime.fromISO(rec.campaign_start_at);
+		const sendDate = campaignStartDate.minus({ days: rec.days_before }).toISODate();
 		return sendDate === today;
 	});
 
