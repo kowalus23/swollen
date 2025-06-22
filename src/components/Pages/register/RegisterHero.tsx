@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 import styles from './RegisterHero.module.scss';
 
@@ -30,6 +31,22 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
+
+// Function to translate Supabase error messages to Polish
+const translateError = (errorCode: string, message: string): string => {
+  switch (errorCode) {
+    case 'user_already_registered':
+      return 'Użytkownik z tym adresem e-mail już istnieje';
+    case 'invalid_email':
+      return 'Nieprawidłowy adres e-mail';
+    case 'weak_password':
+      return 'Hasło jest zbyt słabe';
+    case 'too_many_requests':
+      return 'Zbyt wiele prób rejestracji. Spróbuj ponownie później';
+    default:
+      return message || 'Wystąpił błąd podczas rejestracji';
+  }
+};
 
 export default function RegisterHero() {
   const router = useRouter();
@@ -60,15 +77,15 @@ export default function RegisterHero() {
     })
 
     if (error) {
-      setError(error.message)
+      const translatedError = translateError(error.code || '', error.message);
+      setError(translatedError);
     } else {
-      router.push('/')
+      toast.success('Konto zostało utworzone! Wiadomość aktywacyjna została wysłana na podany adres e-mail.', {
+        duration: 8000,
+      });
+      router.push('/logowanie')
     }
   };
-
-  if (error) {
-    console.log(error)
-  }
 
   return (
     <>
@@ -126,6 +143,12 @@ export default function RegisterHero() {
               error={errors.somethingElse?.message}
             />
           </div>
+
+          {error && (
+            <div className={styles.errorMessage}>
+              {error}
+            </div>
+          )}
 
           <ButtonStripe type="submit" disabled={isSubmitting} className={styles.button}>
             ZAREJESTRUJ
