@@ -17,9 +17,9 @@ export default function PreviewItems() {
   }
 
   const shouldHideAdditionalDescription = () => {
-    if (newCollection.hideAdditionalDescriptionAt && newCollection.hideAdditionalDescription) {
-      const hideDate = new Date(newCollection.hideAdditionalDescriptionAt);
-      return new Date() >= hideDate;
+    if (newCollection.campaignStartAt) {
+      const campaignStartDate = new Date(newCollection.campaignStartAt);
+      return new Date() >= campaignStartDate;
     }
     return false;
   };
@@ -58,9 +58,11 @@ export default function PreviewItems() {
               {newCollection.additionalDescription}
             </p>
           )}
-          <Button className={styles.button} variant='outline'>
-            POWIADOM MNIE O PREMIERZE
-          </Button>
+          {!shouldHideAdditionalDescription() && (
+            <Button className={styles.button} variant='outline'>
+              POWIADOM MNIE O PREMIERZE
+            </Button>
+          )}
         </div>
         {user?.email ? (
           <div className={styles.previewItemsImages}>

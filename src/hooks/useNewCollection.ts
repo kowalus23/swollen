@@ -4,8 +4,8 @@ interface NewCollection {
 	hideSection: boolean;
 	description: string;
 	additionalDescription: string;
-	hideAdditionalDescription: boolean;
-	hideAdditionalDescriptionAt?: string;
+	campaignStartAt: string;
+	campaingName: string;
 	previewImages: string[];
 }
 
