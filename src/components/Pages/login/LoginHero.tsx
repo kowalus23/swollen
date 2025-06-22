@@ -19,6 +19,22 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+// Function to translate Supabase error messages to Polish
+const translateError = (errorCode: string, message: string): string => {
+  switch (errorCode) {
+    case 'email_not_confirmed':
+      return 'Konto musi być aktywowane, wiadomość aktywacyjna została wysłana na podany adres e-mail';
+    case 'invalid_credentials':
+      return 'Nieprawidłowy e-mail lub hasło';
+    case 'user_not_found':
+      return 'Użytkownik nie został znaleziony';
+    case 'too_many_requests':
+      return 'Zbyt wiele prób logowania. Spróbuj ponownie później';
+    default:
+      return message || 'Wystąpił błąd podczas logowania';
+  }
+};
+
 export default function LoginHero() {
   const router = useRouter();
   const [error, setError] = useState('');
@@ -40,15 +56,12 @@ export default function LoginHero() {
     })
 
     if (error) {
-      setError(error.message)
+      const translatedError = translateError(error.code || '', error.message);
+      setError(translatedError);
     } else {
       router.push('/')
     }
   };
-
-  if (error) {
-    console.log(error)
-  }
 
   return (
     <div className={styles.loginWindow}>
@@ -67,6 +80,11 @@ export default function LoginHero() {
           {...register('password')}
           error={errors.password?.message}
         />
+        {error && (
+          <div className={styles.errorMessage}>
+            {error}
+          </div>
+        )}
         <ButtonStripe type="submit" disabled={isSubmitting} className={styles.button}>
           WEJDŹ DO SYSTEMU
         </ButtonStripe>

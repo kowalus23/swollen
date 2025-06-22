@@ -2,6 +2,7 @@
 
 import { ButtonStripe } from '@/components/Button/ButtonStripe';
 import Input from '@/components/Input/Input';
+import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner';
 import { supabase } from '@/lib/supabase';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
@@ -135,6 +136,7 @@ export default function RegisterHero() {
           <Link href="/">WRÓĆ DO STRONY GŁÓWNEJ</Link>
         </div>
       </div>
+      {isSubmitting && <LoadingSpinner />}
     </>
   );
 } 
