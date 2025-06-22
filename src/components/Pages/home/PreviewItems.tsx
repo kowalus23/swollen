@@ -39,27 +39,15 @@ export default function PreviewItems() {
     setErrorMessage('');
 
     try {
-      const response = await fetch('/api/send-email', {
+      const response = await fetch('/api/campaign-reminders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          to: email,
-          subject: 'Powiadomienie o premierze nowej kolekcji',
-          html: `
-            <h2>Dziękujemy za zainteresowanie!</h2>
-            <p>Zostałeś dodany do listy osób, które otrzymają powiadomienie o premierze nowej kolekcji.</p>
-            <p>Email: ${email}</p>
-            <p>Pozdrawiamy,<br>Zespół KVX</p>
-          `,
-          text: `
-            Dziękujemy za zainteresowanie!
-            Zostałeś dodany do listy osób, które otrzymają powiadomienie o premierze nowej kolekcji.
-            Email: ${email}
-            Pozdrawiamy,
-            Zespół KVX
-          `
+          email,
+          campaignName: newCollection.campaingName,
+          campaignStartAt: newCollection.campaignStartAt,
         }),
       });
 
@@ -72,11 +60,11 @@ export default function PreviewItems() {
         }, 2000);
       } else {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Wystąpił błąd podczas wysyłania emaila');
+        throw new Error(errorData.error || 'An error occurred while subscribing.');
       }
     } catch (error) {
       setSubmitStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'Wystąpił nieoczekiwany błąd');
+      setErrorMessage(error instanceof Error ? error.message : 'An unexpected error occurred.');
     } finally {
       setIsSubmitting(false);
     }
