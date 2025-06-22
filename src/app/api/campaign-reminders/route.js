@@ -1,10 +1,5 @@
-import { createClient } from "@supabase/supabase-js";
+import { createServerSupabaseClient } from "@/lib/supabase";
 import { NextResponse } from "next/server";
-
-// Create Supabase client lazily to avoid build-time execution
-const getSupabaseClient = () => {
-	return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY);
-};
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
 
@@ -17,7 +12,7 @@ export async function POST(req) {
 		return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
 	}
 
-	const supabase = getSupabaseClient();
+	const supabase = createServerSupabaseClient();
 
 	// 1. Check for duplicates
 	const { data: existing, error: checkError } = await supabase

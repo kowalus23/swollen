@@ -1,18 +1,13 @@
 // app/api/reminders/route.js
-import { createClient } from "@supabase/supabase-js";
+import { createServerSupabaseClient } from "@/lib/supabase";
 import { DateTime } from "luxon";
 import { NextResponse } from "next/server";
-
-// Create Supabase client lazily to avoid build-time execution
-const getSupabaseClient = () => {
-	return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY);
-};
 
 // adres frontendu (link do aplikacji)
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
 
 export async function GET() {
-	const supabase = getSupabaseClient();
+	const supabase = createServerSupabaseClient();
 
 	// 1. pobierz wszystkie nie‐wysłane
 	const { data, error } = await supabase.from("campaign_reminders").select("*").eq("sent", false);
