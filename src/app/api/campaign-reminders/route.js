@@ -1,7 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY);
+// Create Supabase client lazily to avoid build-time execution
+const getSupabaseClient = () => {
+	return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY);
+};
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
 
@@ -13,6 +16,8 @@ export async function POST(req) {
 	if (!email || !campaignName || !campaignStartAt) {
 		return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
 	}
+
+	const supabase = getSupabaseClient();
 
 	// 1. Check for duplicates
 	const { data: existing, error: checkError } = await supabase

@@ -3,12 +3,17 @@ import { createClient } from "@supabase/supabase-js";
 import { DateTime } from "luxon";
 import { NextResponse } from "next/server";
 
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY);
+// Create Supabase client lazily to avoid build-time execution
+const getSupabaseClient = () => {
+	return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY);
+};
 
 // adres frontendu (link do aplikacji)
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
 
 export async function GET() {
+	const supabase = getSupabaseClient();
+
 	// 1. pobierz wszystkie nie‐wysłane
 	const { data, error } = await supabase.from("campaign_reminders").select("*").eq("sent", false);
 
