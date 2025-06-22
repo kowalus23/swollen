@@ -31,7 +31,6 @@
     "react-hot-toast": "^2.5.2",
     "react-map-gl": "^8.0.4",
     "react-social-media-embed": "^2.5.18",
-    "sib-api-v3-sdk": "^8.5.0",
     "swiper": "^11.2.8",
     "zod": "^3.25.46",
     "zustand": "^5.0.5"

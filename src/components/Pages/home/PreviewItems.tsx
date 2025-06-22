@@ -1,17 +1,17 @@
 import { Button } from '@/components/Button';
+import Input from '@/components/Input';
+import Modal from '@/components/Modal';
 import { useNewCollection } from '@/hooks/useNewCollection';
 import { useUserStore } from '@/store/userStore';
 import Image from 'next/image';
 import { useState } from 'react';
-import Input from '../../../components/Input';
-import Modal from '../../../components/Modal';
 import styles from './PreviewItems.module.scss';
 
 export default function PreviewItems() {
   const { data: newCollection, isLoading } = useNewCollection();
   const user = useUserStore((state) => state.user);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(user?.email || '');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
