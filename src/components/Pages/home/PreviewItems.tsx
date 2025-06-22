@@ -29,7 +29,7 @@ export default function PreviewItems() {
       <div className={styles.previewItemsGridBackground} />
       <div className={styles.previewItemsBackground} />
       <div className={styles.previewItemsContainer}>
-        {user?.email && (
+        {user?.email ? (
           <div className={styles.previewItemsImages}>
             <Image
               src={newCollection.previewImages[0]}
@@ -38,6 +38,12 @@ export default function PreviewItems() {
               height={500}
               className={styles.image}
             />
+          </div>
+        ) : (
+          <div className={styles.previewItemsImages}>
+            <p className={styles.previewItemsImagesText}>
+              Zaloguj się, aby zobaczyć więcej
+            </p>
           </div>
         )}
         <div className={styles.previewItemsContent}>
@@ -56,7 +62,7 @@ export default function PreviewItems() {
             POWIADOM MNIE O PREMIERZE
           </Button>
         </div>
-        {user?.email && (
+        {user?.email ? (
           <div className={styles.previewItemsImages}>
             <Image
               src={newCollection.previewImages[1]}
@@ -65,6 +71,12 @@ export default function PreviewItems() {
               height={500}
               className={styles.image}
             />
+          </div>
+        ) : (
+          <div className={styles.previewItemsImages}>
+            <p className={styles.previewItemsImagesText}>
+              Zaloguj się, aby zobaczyć więcej
+            </p>
           </div>
         )}
 

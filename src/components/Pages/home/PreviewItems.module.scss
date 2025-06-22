@@ -115,6 +115,16 @@
           transform: scale(1.05);
         }
       }
+
+      .previewItemsImagesText {
+        font-size: 0.8rem;
+        max-width: 140px;
+        margin: auto;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.7);
+      }
     }
 
 
