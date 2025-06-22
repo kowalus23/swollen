@@ -58,6 +58,12 @@
   display: flex;
   gap: 1.5rem;
 
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   .modalImage {
     flex-shrink: 0;
     width: 300px;
@@ -82,6 +88,17 @@
       line-height: 1.5;
       color: white;
       margin-bottom: 1.5rem;
+    }
+
+    .sizeSection {
+      margin-bottom: 1.5rem;
+
+      h4 {
+        color: #F6BA00;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+      }
     }
 
     .sizeGrid {
@@ -118,6 +135,28 @@
         }
       }
     }
+
+    .addressSection {
+      margin-bottom: 1.5rem;
+
+      h4 {
+        color: #F6BA00;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+      }
+
+      .formGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .button {
+      width: 100%;
+      margin-top: 1rem;
+    }
   }
 }
 
@@ -130,6 +169,15 @@
     .modalImage {
       width: 250px;
       height: 250px;
+    }
+
+    .modalInfo {
+      .addressSection {
+        .formGrid {
+          grid-template-columns: 1fr;
+          gap: 0.75rem;
+        }
+      }
     }
   }
 }
