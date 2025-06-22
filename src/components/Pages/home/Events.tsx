@@ -43,11 +43,19 @@ export default function Events() {
   }, [setDarkNavigation]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <section id="events" className={styles.eventsSection}>
+        <div>Loading...</div>;
+      </section>
+    )
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <section id="events" className={styles.eventsSection}>
+        <div>Error: {error}</div>;
+      </section>
+    )
   }
 
   return (

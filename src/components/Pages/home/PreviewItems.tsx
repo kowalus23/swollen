@@ -9,7 +9,11 @@ export default function PreviewItems() {
   const user = useUserStore((state) => state.user);
 
   if (isLoading || !newCollection || newCollection.hideSection) {
-    return null;
+    return (
+      <section id="aktualnosci" className={styles.previewItemsSection}>
+        <div>Loading...</div>;
+      </section>
+    )
   }
 
   const shouldHideAdditionalDescription = () => {
