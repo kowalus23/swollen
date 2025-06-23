@@ -26,14 +26,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Swollen Katz",
     description: "Wyjątkowe dropy na koty",
-    url: "https://swollenkatz.com", // Replace with your actual domain
+    url: "https://swollenkatz.com",
     siteName: "Swollen Katz",
     images: [
       {
-        url: "/images/og-image.png", // Using your existing cat image as OG image
+        url: "https://swollenkatz.com/images/og-image.png",
         width: 1200,
         height: 630,
         alt: "Swollen Katz - Wyjątkowe dropy na koty",
+        type: "image/png",
       },
     ],
     locale: "pl_PL",
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Swollen Katz",
     description: "Wyjątkowe dropy na koty",
-    images: ["/images/og-image.png"],
+    images: ["https://swollenkatz.com/images/og-image.png"],
   },
 };
 
