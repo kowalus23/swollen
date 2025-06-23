@@ -32,7 +32,7 @@ export const metadata: Metadata = {
       {
         url: "https://swollenkatz.com/images/og-image.png",
         width: 1200,
-        height: 630,
+        height: 608,
         alt: "Swollen Katz - Wyjątkowe dropy na koty",
         type: "image/png",
       },
@@ -67,6 +67,14 @@ export default async function RootLayout({
         <link rel="apple-touch-icon" sizes="180x180" href="/manifest/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest/site.webmanifest" />
         <link href="https://db.onlinewebfonts.com/c/da9cff182f31b3af02363c770502bf49?family=Brushstrike" rel="stylesheet" />
+
+        {/* Additional meta tags for better social media sharing */}
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="608" />
+        <meta property="og:image:type" content="image/png" />
+        <meta name="twitter:image:width" content="1200" />
+        <meta name="twitter:image:height" content="608" />
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
