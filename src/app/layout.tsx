@@ -23,6 +23,28 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Swollen Katz",
   description: "Wyjątkowe dropy na koty",
+  openGraph: {
+    title: "Swollen Katz",
+    description: "Wyjątkowe dropy na koty",
+    url: "https://swollenkatz.com", // Replace with your actual domain
+    siteName: "Swollen Katz",
+    images: [
+      {
+        url: "/images/og-image.png", // Using your existing cat image as OG image
+        width: 1200,
+        height: 630,
+        alt: "Swollen Katz - Wyjątkowe dropy na koty",
+      },
+    ],
+    locale: "pl_PL",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Swollen Katz",
+    description: "Wyjątkowe dropy na koty",
+    images: ["/images/og-image.png"],
+  },
 };
 
 export default async function RootLayout({
