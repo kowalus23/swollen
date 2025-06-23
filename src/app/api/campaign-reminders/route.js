@@ -1,9 +1,30 @@
 import { createServerSupabaseClient } from "@/lib/supabase";
+import { readFileSync } from "fs";
 import { NextResponse } from "next/server";
+import { join } from "path";
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
 
 const REMINDER_DAYS = [7, 1];
+
+// Function to get campaign title from campaigns.json
+function getCampaignTitle(campaignName) {
+	try {
+		const campaignsPath = join(process.cwd(), "public", "campaigns.json");
+		const campaignsData = JSON.parse(readFileSync(campaignsPath, "utf8"));
+
+		if (campaignsData[campaignName] && campaignsData[campaignName].title) {
+			return `"${campaignsData[campaignName].title}"`;
+		}
+
+		// Fallback to original campaign name if not found
+		return `"${campaignName}"`;
+	} catch (error) {
+		console.error("Error reading campaigns.json:", error);
+		// Fallback to original campaign name if file read fails
+		return `"${campaignName}"`;
+	}
+}
 
 export async function POST(req) {
 	const { email, campaignName, campaignStartAt } = await req.json();
@@ -13,6 +34,9 @@ export async function POST(req) {
 	}
 
 	const supabase = createServerSupabaseClient();
+
+	// Get the formatted campaign title
+	const campaignTitle = getCampaignTitle(campaignName);
 
 	// 1. Check for duplicates
 	const { data: existing, error: checkError } = await supabase
@@ -48,9 +72,9 @@ export async function POST(req) {
 	}
 
 	// 3. Send confirmation email
-	const subject = `You're on the list for ${campaignName}!`;
-	const text = `Hi! We'll notify you about the launch of "${campaignName}" on ${new Date(campaignStartAt).toLocaleDateString()}. Check out our app: ${APP_URL}`;
-	const html = `<p>Hi!</p><p>We'll notify you about the launch of <strong>${campaignName}</strong> on <strong>${new Date(
+	const subject = `You're on the list for ${campaignTitle}!`;
+	const text = `Hi! We'll notify you about the launch of ${campaignTitle} on ${new Date(campaignStartAt).toLocaleDateString()}. Check out our app: ${APP_URL}`;
+	const html = `<p>Hi!</p><p>We'll notify you about the launch of <strong>${campaignTitle}</strong> on <strong>${new Date(
 		campaignStartAt
 	).toLocaleDateString()}</strong>.</p><p><a href="${APP_URL}" target="_blank" rel="noopener">Visit our app</a></p>`;
 
