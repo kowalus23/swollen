@@ -30,7 +30,7 @@ export async function POST(req) {
 	const { email, campaignName, campaignStartAt } = await req.json();
 
 	if (!email || !campaignName || !campaignStartAt) {
-		return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+		return NextResponse.json({ error: "Brak wymaganych pól" }, { status: 400 });
 	}
 
 	const supabase = createServerSupabaseClient();
@@ -68,15 +68,20 @@ export async function POST(req) {
 
 	if (insertError) {
 		console.error("Error inserting new reminders:", insertError);
-		return NextResponse.json({ error: "Could not add you to the notification list." }, { status: 500 });
+		return NextResponse.json({ error: "Nie udało się dodać Ci do listy powiadomień." }, { status: 500 });
 	}
 
 	// 3. Send confirmation email
-	const subject = `You're on the list for ${campaignTitle}!`;
-	const text = `Hi! We'll notify you about the launch of ${campaignTitle} on ${new Date(campaignStartAt).toLocaleDateString()}. Check out our app: ${APP_URL}`;
-	const html = `<p>Hi!</p><p>We'll notify you about the launch of <strong>${campaignTitle}</strong> on <strong>${new Date(
-		campaignStartAt
-	).toLocaleDateString()}</strong>.</p><p><a href="${APP_URL}" target="_blank" rel="noopener">Visit our app</a></p>`;
+	const subject = `🚀 Gotowy na ${campaignTitle}? Jesteś już na pokładzie!`;
+	const text = `Cześć! 🎉 Trafiłeś prosto na listę VIP na premierę ${campaignTitle}.  
+Startujemy ${new Date(campaignStartAt).toLocaleDateString()} – wyślemy Ci przypomnienie, żebyś niczego nie przegapił!  
+Sprawdź naszą apkę: ${APP_URL}`;
+const html = `
+  <p>Cześć! 🎉</p>
+  <p>Jesteś teraz na liście VIP na premierę <strong>${campaignTitle}</strong>.</p>
+  <p>Startujemy <strong>${new Date(campaignStartAt).toLocaleDateString()}</strong> – przypomnimy Ci o tym dniu!</p>
+  <p>👉 <a href="${APP_URL}" target="_blank">Zajrzyj do naszej apki</a> i bądź na bieżąco.</p>
+`;
 
 	try {
 		const emailResponse = await fetch(`${APP_URL}/api/send-email`, {
@@ -93,5 +98,5 @@ export async function POST(req) {
 		console.error("Failed to fetch /api/send-email:", e);
 	}
 
-	return NextResponse.json({ message: "Successfully subscribed for reminders!" }, { status: 201 });
+	return NextResponse.json({ message: "Pomyślnie zapisano Cię do powiadomień o nadochodzącej premierze!" }, { status: 201 });
 }
