@@ -157,6 +157,10 @@ export const Navigation = () => {
     },
   ];
 
+  if (isLoginPage || isRegisterPage) {
+    return null;
+  }
+
   return (
     <aside className={`${styles.navigation} ${isLoginPage || isRegisterPage ? styles.hidden : ''}`}>
       <div className={styles.navigationContainer}>
