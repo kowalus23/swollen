@@ -125,8 +125,7 @@ Data zamówienia: ${new Date().toLocaleString("pl-PL")}
         <h1 style="color: #333; text-align: center; margin-bottom: 30px; font-size: 24px;">✅ Potwierdzenie zamówienia</h1>
         
         <div style="background-color: #d4edda; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #28a745;">
-          <h2 style="color: #155724; margin-top: 0; font-size: 18px;">🎉 Dziękujemy za złożenie zamówienia w Swollen Katz!</h2>
-          <p style="margin: 10px 0; font-size: 16px; color: #155724;">Niedługo się do Ciebie odezwiemy z informacjami na temat procesowania zamówienia.</p>
+          <h2 style="color: #155724; margin-top: 0; margin-bottom: 0; font-size: 18px;">🎉 Dziękujemy za złożenie zamówienia w Swollen Katz!</h2>
         </div>
 
         <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
