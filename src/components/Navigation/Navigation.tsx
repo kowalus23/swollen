@@ -90,6 +90,7 @@ export const Navigation = () => {
 
   const isLoginPage = pathname.includes('/logowanie');
   const isRegisterPage = pathname.includes('/rejestracja');
+  const isChangePasswordPage = pathname.includes('/zmiana-hasla');
 
   useEffect(() => {
     const checkIfDesktop = () => {
@@ -217,12 +218,12 @@ export const Navigation = () => {
     },
   ];
 
-  if (isLoginPage || isRegisterPage) {
+  if (isLoginPage || isRegisterPage || isChangePasswordPage) {
     return null;
   }
 
   return (
-    <aside className={`${styles.navigation} ${isLoginPage || isRegisterPage ? styles.hidden : ''}`}>
+    <aside className={`${styles.navigation} ${isLoginPage || isRegisterPage || isChangePasswordPage ? styles.hidden : ''}`}>
       <div className={styles.navigationContainer}>
         <NewsCard />
         <div className={styles.container}>
