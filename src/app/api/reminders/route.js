@@ -40,7 +40,7 @@ Sprawdź aplikację: ${APP_URL}
     `.trim();
 
 		try {
-			const res = await fetch(`api/send-email`, {
+			const res = await fetch(`${APP_URL}/api/send-email`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({

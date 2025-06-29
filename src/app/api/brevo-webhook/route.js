@@ -1,11 +1,9 @@
-// pages/api/brevo-webhook.js
-export default async function handler(req, res) {
-	if (req.method !== "POST") {
-		return res.status(405).end();
-	}
+import { NextResponse } from "next/server";
 
-	// Brevo wysyła payload w req.body.data
-	const events = Array.isArray(req.body) ? req.body : req.body.data;
+export async function POST(request) {
+	// Brevo wysyła payload w request.body.data
+	const body = await request.json();
+	const events = Array.isArray(body) ? body : body.data;
 
 	for (const ev of events) {
 		const { email, messageId, event, ts, url } = ev;
@@ -30,5 +28,5 @@ export default async function handler(req, res) {
 	}
 
 	// Brevo oczekuje 2xx
-	res.status(200).json({ status: "ok" });
+	return NextResponse.json({ status: "ok" });
 }

@@ -1,4 +1,4 @@
-// pages/api/send-email.js
+// app/api/send-email/route.js
 
 export async function POST(req) {
 	const body = await req.json();
