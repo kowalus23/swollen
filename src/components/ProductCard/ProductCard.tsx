@@ -21,6 +21,9 @@ interface AddressForm {
 export default function ProductCard({ product }: ProductCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
   const [addressForm, setAddressForm] = useState<AddressForm>({
     email: '',
     phone: '',
@@ -41,15 +44,19 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedSize(null);
-    setAddressForm({
-      email: '',
-      phone: '',
-      postalCode: '',
-      street: '',
-      city: ''
-    });
+    if (!isSubmitting) {
+      setIsModalOpen(false);
+      setSelectedSize(null);
+      setSubmitStatus('idle');
+      setErrorMessage('');
+      setAddressForm({
+        email: '',
+        phone: '',
+        postalCode: '',
+        street: '',
+        city: ''
+      });
+    }
   };
 
   const isFormValid = () => {
@@ -59,6 +66,48 @@ export default function ProductCard({ product }: ProductCardProps) {
       addressForm.postalCode &&
       addressForm.street &&
       addressForm.city;
+  };
+
+  const handleOrderSubmit = async () => {
+    if (!isFormValid() || isSubmitting) return;
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          productName: product.name,
+          productSize: selectedSize,
+          addressCity: addressForm.city,
+          addressPostalCode: addressForm.postalCode,
+          addressStreet: addressForm.street,
+          contactEmail: addressForm.email,
+          contactPhone: addressForm.phone,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        // Close modal after 2 seconds
+        setTimeout(() => {
+          handleCloseModal();
+        }, 2000);
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Wystąpił błąd podczas składania zamówienia.');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'Wystąpił nieoczekiwany błąd.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -113,6 +162,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     key={size}
                     className={`${styles.sizeOption} ${selectedSize === size ? styles.selected : ''}`}
                     onClick={() => setSelectedSize(size)}
+                    disabled={isSubmitting}
                   >
                     {size}
                   </Button>
@@ -132,6 +182,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     onChange={handleInputChangeEvent('email')}
                     placeholder="Twój email"
                     required
+                    disabled={isSubmitting}
                   />
 
                   <Input
@@ -141,6 +192,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     onChange={handleInputChangeEvent('phone')}
                     placeholder="Twój numer telefonu"
                     required
+                    disabled={isSubmitting}
                   />
 
                   <Input
@@ -150,6 +202,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     onChange={handleInputChangeEvent('postalCode')}
                     placeholder="00-000"
                     required
+                    disabled={isSubmitting}
                   />
 
                   <Input
@@ -159,6 +212,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     onChange={handleInputChangeEvent('street')}
                     placeholder="Ulica i numer domu"
                     required
+                    disabled={isSubmitting}
                   />
 
                   <Input
@@ -168,24 +222,46 @@ export default function ProductCard({ product }: ProductCardProps) {
                     onChange={handleInputChangeEvent('city')}
                     placeholder="Miasto"
                     required
+                    disabled={isSubmitting}
                   />
                 </div>
               </div>
             )}
 
+            {/* Status Messages */}
+            {submitStatus === 'success' && (
+              <div style={{
+                backgroundColor: '#d4edda',
+                color: '#155724',
+                padding: '12px',
+                borderRadius: '6px',
+                marginBottom: '1rem',
+                border: '1px solid #c3e6cb'
+              }}>
+                ✅ Zamówienie zostało złożone pomyślnie! Wysłaliśmy potwierdzenie na Twój email.
+              </div>
+            )}
+
+            {submitStatus === 'error' && (
+              <div style={{
+                backgroundColor: '#f8d7da',
+                color: '#721c24',
+                padding: '12px',
+                borderRadius: '6px',
+                marginBottom: '1rem',
+                border: '1px solid #f5c6cb'
+              }}>
+                ❌ {errorMessage}
+              </div>
+            )}
+
             <Button
               className={styles.button}
-              disabled={!isFormValid()}
-              onClick={() => {
-                // Handle order submission here
-                console.log('Order submitted:', {
-                  product: product.name,
-                  size: selectedSize,
-                  address: addressForm
-                });
-              }}
+              disabled={!isFormValid() || isSubmitting}
+              onClick={handleOrderSubmit}
+              isLoading={isSubmitting}
             >
-              ZAMÓW
+              {isSubmitting ? 'SKŁADANIE ZAMÓWIENIA...' : 'ZAMÓW'}
             </Button>
           </div>
         </div>
