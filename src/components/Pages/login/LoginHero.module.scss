@@ -125,3 +125,69 @@
 .footer {
   margin-top: 1rem;
 }
+
+// Modal content styles
+.modalDescription {
+  color: #FFFFFF;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.resetForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .errorMessage {
+    background-color: rgb(94 0 9 / 40%);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    color: #dc3545;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    text-align: center;
+    backdrop-filter: blur(5px);
+  }
+}
+
+.modalButtons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+
+  .cancelButton {
+    flex: 1;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #FFFFFF;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .resetButton {
+    flex: 1;
+  }
+}
+
+.successMessage {
+  text-align: center;
+  color: #FFFFFF;
+
+  p {
+    margin: 0.5rem 0;
+    line-height: 1.5;
+  }
+
+  p:first-child {
+    color: #28a745;
+    font-weight: 600;
+  }
+}

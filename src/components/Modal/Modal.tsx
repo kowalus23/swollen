@@ -1,6 +1,6 @@
 'use client';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './Modal.module.scss';
 
@@ -13,8 +13,15 @@ interface ModalProps {
 
 export default function Modal({ isOpen, onClose, title, children }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
@@ -30,13 +37,18 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, mounted]);
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === modalRef.current) {
       onClose();
     }
   };
+
+  // Don't render anything on the server
+  if (!mounted) {
+    return null;
+  }
 
   return createPortal(
     <AnimatePresence>
