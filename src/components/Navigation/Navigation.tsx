@@ -17,6 +17,66 @@ interface NavItem {
   onClick?: () => void;
 }
 
+// Subcomponent for navigation item with tooltip
+const NavItemWithTooltip = ({
+  item,
+  isActive,
+  isDesktop,
+  activeTooltip,
+  setActiveTooltip,
+  hovered,
+  setHovered,
+  styles
+}: {
+  item: NavItem;
+  isActive: boolean;
+  isDesktop: boolean;
+  activeTooltip: string | null;
+  setActiveTooltip: (label: string | null) => void;
+  hovered: string | null;
+  setHovered: (id: string | null) => void;
+  styles: any;
+}) => {
+  const { refs, floatingStyles } = useFloating({
+    placement: 'right',
+    middleware: [offset(12), shift(), flip()],
+  });
+  const iconColor = hovered === item.id || isActive ? '#ffbf00' : '#fff';
+  return (
+    <div className={styles.navItem}>
+      <button
+        ref={refs.setReference}
+        onClick={item.onClick}
+        onMouseEnter={() => {
+          if (isDesktop) {
+            setActiveTooltip(item.label);
+            setHovered(item.id);
+          }
+        }}
+        onMouseLeave={() => {
+          if (isDesktop) {
+            setActiveTooltip(null);
+            setHovered(null);
+          }
+        }}
+        className={styles.button}
+        style={{ color: iconColor }}
+      >
+        {item.icon}
+      </button>
+      {activeTooltip === item.label && (
+        <div
+          ref={refs.setFloating}
+          style={floatingStyles}
+          className={styles.tooltip}
+        >
+          {item.label}
+        </div>
+      )}
+    </div>
+  );
+};
+
 export const Navigation = () => {
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
@@ -167,47 +227,19 @@ export const Navigation = () => {
         <NewsCard />
         <div className={styles.container}>
           <div className={styles.navItems}>
-            {navItems.map((item) => {
-              const { refs, floatingStyles } = useFloating({
-                placement: 'right',
-                middleware: [offset(12), shift(), flip()],
-              });
-              const isActive = activeSection === item.id;
-              const iconColor = hovered === item.id || isActive ? '#ffbf00' : '#fff';
-              return (
-                <div key={item.id} className={styles.navItem}>
-                  <button
-                    ref={refs.setReference}
-                    onClick={item.onClick}
-                    onMouseEnter={() => {
-                      if (isDesktop) {
-                        setActiveTooltip(item.label);
-                        setHovered(item.id);
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      if (isDesktop) {
-                        setActiveTooltip(null);
-                        setHovered(null);
-                      }
-                    }}
-                    className={styles.button}
-                    style={{ color: iconColor }}
-                  >
-                    {item.icon}
-                  </button>
-                  {activeTooltip === item.label && (
-                    <div
-                      ref={refs.setFloating}
-                      style={floatingStyles}
-                      className={styles.tooltip}
-                    >
-                      {item.label}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+            {navItems.map((item) => (
+              <NavItemWithTooltip
+                key={item.id}
+                item={item}
+                isActive={activeSection === item.id}
+                isDesktop={isDesktop}
+                activeTooltip={activeTooltip}
+                setActiveTooltip={setActiveTooltip}
+                hovered={hovered}
+                setHovered={setHovered}
+                styles={styles}
+              />
+            ))}
           </div>
           <div className={styles.indicator} />
         </div>
