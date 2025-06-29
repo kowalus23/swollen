@@ -102,9 +102,9 @@ Data zamówienia: ${new Date().toLocaleString("pl-PL")}
 async function sendOrderConfirmationEmail(orderData) {
 	const { productName, productSize, addressCity, addressPostalCode, addressStreet, contactEmail, contactPhone } = orderData;
 
-	const subject = "Potwierdzenie zamówienia - KVX";
+	const subject = "Potwierdzenie zamówienia - Swollen Katz";
 	const text = `
-Dziękujemy za Twoje zamówienie!
+Dziękujemy za złożenie zamówienia w Swollen Katz!
 
 Szczegóły zamówienia:
 Produkt: ${productName}
@@ -114,7 +114,7 @@ Adres dostawy:
 ${addressStreet}
 ${addressPostalCode} ${addressCity}
 
-Skontaktujemy się z Tobą wkrótce w sprawie realizacji zamówienia.
+Niedługo się do Ciebie odezwiemy z informacjami na temat procesowania zamówienia.
 
 Data zamówienia: ${new Date().toLocaleString("pl-PL")}
 	`.trim();
@@ -125,8 +125,8 @@ Data zamówienia: ${new Date().toLocaleString("pl-PL")}
         <h1 style="color: #333; text-align: center; margin-bottom: 30px; font-size: 24px;">✅ Potwierdzenie zamówienia</h1>
         
         <div style="background-color: #d4edda; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #28a745;">
-          <h2 style="color: #155724; margin-top: 0; font-size: 18px;">🎉 Dziękujemy za Twoje zamówienie!</h2>
-          <p style="margin: 10px 0; font-size: 16px; color: #155724;">Twoje zamówienie zostało przyjęte i jest w trakcie realizacji.</p>
+          <h2 style="color: #155724; margin-top: 0; font-size: 18px;">🎉 Dziękujemy za złożenie zamówienia w Swollen Katz!</h2>
+          <p style="margin: 10px 0; font-size: 16px; color: #155724;">Niedługo się do Ciebie odezwiemy z informacjami na temat procesowania zamówienia.</p>
         </div>
 
         <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
@@ -144,7 +144,7 @@ Data zamówienia: ${new Date().toLocaleString("pl-PL")}
 
         <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
           <h2 style="color: #856404; margin-top: 0; font-size: 18px;">📞 Co dalej?</h2>
-          <p style="margin: 10px 0; font-size: 16px; color: #856404;">Skontaktujemy się z Tobą wkrótce w sprawie realizacji zamówienia.</p>
+          <p style="margin: 10px 0; font-size: 16px; color: #856404;">Niedługo się do Ciebie odezwiemy z informacjami na temat procesowania zamówienia.</p>
         </div>
 
         <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #e9ecef;">
@@ -168,7 +168,7 @@ Data zamówienia: ${new Date().toLocaleString("pl-PL")}
 		const data = {
 			sender: {
 				email: process.env.NEXT_PUBLIC_MAIL_FROM_EMAIL,
-				name: process.env.NEXT_PUBLIC_MAIL_FROM_NAME || "KVX",
+				name: process.env.NEXT_PUBLIC_MAIL_FROM_NAME || "Swollen Katz",
 			},
 			to: [{ email: contactEmail }],
 			subject,
