@@ -141,7 +141,7 @@ Data zamówienia: ${new Date().toLocaleString("pl-PL")}
           <p style="margin: 10px 0; font-size: 16px;"><strong>Miasto:</strong> ${addressCity}</p>
         </div>
 
-        <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
+        <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
           <h2 style="color: #856404; margin-top: 0; font-size: 18px;">📞 Co dalej?</h2>
           <p style="margin: 10px 0; font-size: 16px; color: #856404;">Niedługo się do Ciebie odezwiemy z informacjami na temat procesowania zamówienia.</p>
         </div>
