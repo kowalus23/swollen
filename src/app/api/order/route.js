@@ -60,24 +60,41 @@ Data zamówienia: ${new Date().toLocaleString("pl-PL")}
   `.trim();
 
 	try {
-		const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/send-email`, {
+		// Direct Brevo API call instead of self-referencing fetch
+		const BREVO_API_KEY = process.env.NEXT_PUBLIC_BREVO_API_KEY;
+		if (!BREVO_API_KEY) {
+			console.error("Klucz API Brevo nie jest skonfigurowany");
+			return;
+		}
+
+		const url = "https://api.brevo.com/v3/smtp/email";
+		const data = {
+			sender: {
+				email: process.env.NEXT_PUBLIC_MAIL_FROM_EMAIL,
+				name: process.env.NEXT_PUBLIC_MAIL_FROM_NAME || "KVX",
+			},
+			to: [{ email: process.env.NEXT_PUBLIC_MAIL_FROM_EMAIL }],
+			subject,
+			htmlContent: html,
+			textContent: text,
+		};
+
+		const response = await fetch(url, {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				to: process.env.NEXT_PUBLIC_MAIL_FROM_EMAIL,
-				subject,
-				text,
-				html,
-			}),
+			headers: {
+				"Content-Type": "application/json",
+				"api-key": BREVO_API_KEY,
+			},
+			body: JSON.stringify(data),
 		});
 
 		if (!response.ok) {
-			console.error("Failed to send order notification email:", await response.json());
+			console.error("Nie udało się wysłać emaila z powiadomieniem o zamówieniu:", await response.json());
 		} else {
-			console.log("Order notification email sent successfully");
+			console.log("Email z powiadomieniem o zamówieniu został wysłany pomyślnie");
 		}
 	} catch (error) {
-		console.error("Error sending order notification email:", error);
+		console.error("Błąd podczas wysyłania emaila z powiadomieniem o zamówieniu:", error);
 	}
 }
 
@@ -140,24 +157,41 @@ Data zamówienia: ${new Date().toLocaleString("pl-PL")}
   `.trim();
 
 	try {
-		const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/send-email`, {
+		// Direct Brevo API call instead of self-referencing fetch
+		const BREVO_API_KEY = process.env.NEXT_PUBLIC_BREVO_API_KEY;
+		if (!BREVO_API_KEY) {
+			console.error("Klucz API Brevo nie jest skonfigurowany");
+			return;
+		}
+
+		const url = "https://api.brevo.com/v3/smtp/email";
+		const data = {
+			sender: {
+				email: process.env.NEXT_PUBLIC_MAIL_FROM_EMAIL,
+				name: process.env.NEXT_PUBLIC_MAIL_FROM_NAME || "KVX",
+			},
+			to: [{ email: contactEmail }],
+			subject,
+			htmlContent: html,
+			textContent: text,
+		};
+
+		const response = await fetch(url, {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				to: contactEmail,
-				subject,
-				text,
-				html,
-			}),
+			headers: {
+				"Content-Type": "application/json",
+				"api-key": BREVO_API_KEY,
+			},
+			body: JSON.stringify(data),
 		});
 
 		if (!response.ok) {
-			console.error("Failed to send order confirmation email:", await response.json());
+			console.error("Nie udało się wysłać emaila z potwierdzeniem zamówienia:", await response.json());
 		} else {
-			console.log("Order confirmation email sent successfully");
+			console.log("Email z potwierdzeniem zamówienia został wysłany pomyślnie");
 		}
 	} catch (error) {
-		console.error("Error sending order confirmation email:", error);
+		console.error("Błąd podczas wysyłania emaila z potwierdzeniem zamówienia:", error);
 	}
 }
 
@@ -167,41 +201,44 @@ export async function POST(request) {
 
 		// 1. Basic validation
 		if (!productName || !productSize || !addressCity || !addressPostalCode || !addressStreet || !contactEmail || !contactPhone) {
-			return NextResponse.json({ error: "All fields are required." }, { status: 400 });
+			return NextResponse.json({ error: "Wszystkie pola są wymagane." }, { status: 400 });
 		}
 
 		if (productName.length > 150) {
-			return NextResponse.json({ error: "productName must be at most 150 characters." }, { status: 400 });
+			return NextResponse.json({ error: "Nazwa produktu może mieć maksymalnie 150 znaków." }, { status: 400 });
 		}
 
 		if (productSize.length > 10) {
-			return NextResponse.json({ error: "productSize must be at most 10 characters." }, { status: 400 });
+			return NextResponse.json({ error: "Rozmiar produktu może mieć maksymalnie 10 znaków." }, { status: 400 });
 		}
 
 		// simple email regex
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 		if (!emailRegex.test(contactEmail)) {
-			return NextResponse.json({ error: "Invalid email format." }, { status: 400 });
+			return NextResponse.json({ error: "Nieprawidłowy format adresu email." }, { status: 400 });
 		}
 
 		// 2. Insert into Supabase
-		const { data, error } = await supabase.from("product_orders").insert([
-			{
-				product_name: productName,
-				product_size: productSize,
-				address_city: addressCity,
-				address_postal_code: addressPostalCode,
-				address_street: addressStreet,
-				contact_email: contactEmail,
-				contact_phone: contactPhone,
-			},
-		]);
+		const { data, error } = await supabase
+			.from("product_orders")
+			.insert([
+				{
+					product_name: productName,
+					product_size: productSize,
+					address_city: addressCity,
+					address_postal_code: addressPostalCode,
+					address_street: addressStreet,
+					contact_email: contactEmail,
+					contact_phone: contactPhone,
+				},
+			])
+			.select(); // Add .select() to return the inserted data
 
 		if (error) {
 			// Supabase returns Postgres error codes in `error.code`
 			// 23505 = unique_violation
 			if (error.code === "23505") {
-				return NextResponse.json({ error: "You have already ordered that product." }, { status: 409 });
+				return NextResponse.json({ error: "Zamówiłeś już ten produkt." }, { status: 409 });
 			}
 			// other errors
 			return NextResponse.json({ error: error.message }, { status: 500 });
@@ -229,9 +266,10 @@ export async function POST(request) {
 			contactPhone,
 		});
 
+		// 5. Return the created order data
 		return NextResponse.json({ order: data[0] }, { status: 201 });
 	} catch (err) {
-		console.error("Order API error:", err);
-		return NextResponse.json({ error: "Internal server error." }, { status: 500 });
+		console.error("Błąd API zamówienia:", err);
+		return NextResponse.json({ error: "Wystąpił błąd wewnętrzny serwera." }, { status: 500 });
 	}
 }
